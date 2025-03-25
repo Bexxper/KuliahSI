@@ -1181,7 +1181,7 @@ action|input
   var = {}
   var[0] = "OnTalkBubble"
   var[1] = GetLocal().netid
-  var[2] = "`9Proxy was injected successfully. `1Created by @Dom[Bexxper]"
+  var[2] = "`9Proxy `0[ [`b[ DOM ]`0] was injected successfully."
   var[3] = 0
   var[4] = 0
   var.netid = -1
