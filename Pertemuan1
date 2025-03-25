@@ -183,13 +183,57 @@ AddCallback("fdl_command", "OnPacket", function(type, packet)
     if type == 2 and packet:find("action|input\n|text|/fdl") then
         ENABLED = not ENABLED -- Toggle status script
         if ENABLED then
-            SendPacket(2,"action|input\n|text|`1[Auto BGL] `2Converter `0Activated!")
+            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `2Converter `0Activated!")
         else
-            SendPacket(2,"action|input\n|text|`1[Auto BGL] `4Converter `0Deactivated!")
+            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `4Converter `0Deactivated!")
         end
         return true
     end
 end)
+---Auto buy Champgne
+local TELEPHONE_X = 0 -- Koordinat X Telephone
+local TELEPHONE_Y = 0 -- Koordinat Y Telephone
+local ENABLED = false  -- Script default nonaktif
+
+-- Fungsi untuk menangani event dialog saat wrench telephone
+function OnDialogRequest(varlist)
+    if ENABLED and varlist[1]:find("Telephone") then
+        -- Ambil posisi telephone dari embed_data
+        TELEPHONE_X = tonumber(varlist[1]:match('embed_data|x|(%d+)')) or TELEPHONE_X
+        TELEPHONE_Y = tonumber(varlist[1]:match('embed_data|y|(%d+)')) or TELEPHONE_Y
+
+        -- Jalankan fungsi untuk membeli Champagne
+        BuyChampagne()
+        return true
+    end
+end
+
+-- Fungsi untuk membeli Champagne menggunakan 1 BGL
+function BuyChampagne()
+    if TELEPHONE_X ~= 0 and TELEPHONE_Y ~= 0 then
+        SendPacket(2, "action|dialog_return\ndialog_name|telephone\nnum|53785|\nx|"..TELEPHONE_X.."|\ny|"..TELEPHONE_Y.."|\nbuttonClicked|getchamp")
+        LogToConsole("Successfully purchased Champagne for 1 BGL!")
+    else
+        LogToConsole("Error: Telephone coordinates not found!")
+    end
+end
+
+-- Menambahkan hook agar mendeteksi setiap kali wrench Telephone
+AddCallback("OnDialogRequest", "OnVarlist", OnDialogRequest)
+
+-- Command untuk mengaktifkan atau menonaktifkan script
+AddCallback("champ_command", "OnPacket", function(type, packet)
+    if type == 2 and packet:find("action|input\n|text|/champ") then
+        ENABLED = not ENABLED -- Toggle status script
+        if ENABLED then
+            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `2Auto Buy Champagne `0Activated!")
+        else
+            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `4Auto Buy Champagne `0Deactivated!")
+        end
+        return true
+    end
+end)
+
 ---custom drop dl
 AddCallback("dropdl command", "OnPacket", function(type, packet)
     -- Check if it's a chat message starting with "/dd"
