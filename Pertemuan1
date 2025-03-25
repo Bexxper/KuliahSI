@@ -15,18 +15,42 @@ function OnConsoleMessage(text)
   var.netid = -1
   SendVarlist(var)
 end
-OnConsoleMessage("`0[ `1Discord : Bexxper `0] Proxy by @Dom")
+OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] Proxy by @Dom")
 OnTextOverlay("`2Proxy by @Dom/Bexxper")
 local function Dialog()
   local var = {}
   var[0] = "OnDialogRequest"
-  var[1] = "set_default_color|`o\nadd_label_with_icon|big|`1Proxy V1 `bBexxper `0 & `1Aawastore``|left|3802|\nadd_textbox|Proxy Created by `bDom `0|\nend_dialog|||Continue|"
+  var[1] = [[
+set_default_color|`o
+add_label_with_icon|big|`0Proxy [`b[ DOM ]`0] `0[CPS]``|left|7340|
+add_spacer|small|
+add_label_with_icon|small|Proxy Version : `0V1.0``|left|10794|
+add_label_with_icon|small|`3Collaborate with Aawastore``|left|10794|
+add_label_with_icon|small|`0/proxy `1To see All Feature``|left|10794|
+add_spacer|small|
+add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
+|left|2278|
+add_spacer|small|
+add_label_with_icon|medium|`0Log Update``|left|3524|
+add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left|3522|
+add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
+add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_spacer|small|
+add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
+add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
+add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
+add_url_button||`2Whatsapp Aawastore``|kr|https://wa.me/6287722814744|
+add_spacer|small|
+add_button|end_dialog|Continue|
+add_quick_exit
+]]
   var.netid = -1
   SendVarlist(var)
 end
 Dialog()
-key = "Discord : Bexxper."
-if key == "Discord : Bexxper." then
+key = "Dom."
+if key == "Dom." then
   function OnTextOverlay(text)
     var = {}
     var[0] = "OnTextOverlay"
@@ -41,7 +65,7 @@ if key == "Discord : Bexxper." then
     var.netid = -1
     SendVarlist(var)
   end
-  OnConsoleMessage("`0[ `3Discord : Bexxper `0] Proxy Injected! `9/proxy to show commands !")
+  OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] Proxy Injected! `9/proxy to show commands !")
   Announcement = "Proxy by @Dom[Bexxper]"
   function proxy_commands()
     function string.removeColors(varlist)
@@ -54,45 +78,48 @@ if key == "Discord : Bexxper." then
     varlist[0] = "OnDialogRequest"
     varlist[1] = [[
 set_default_color|`o
-add_label_with_icon|big|`0Proxy @Dom[Bexxper]``|left|7340|
+add_label_with_icon|big|`0Proxy [`b[ DOM ]`0] `0[CPS]``|left|7340|
 add_spacer|small|
-add_label_with_icon|small|Proxy Version : `0v1``|left|10794|
-add_spacer|small|
-add_label_with_icon|small|`9Announcement : `3]] .. Announcement .. [[
-``|left|2480|
+add_label_with_icon|small|Proxy Version : `0V1.0``|left|10794|
+add_label_with_icon|small|`3Collaborate with Aawastore``|left|10794|
+add_label_with_icon|small|`0/proxy `1To see All Feature``|left|10794|
 add_label_with_icon|small|`bTiktok `0: futirrr``|left|10794|
-add_label_with_icon|small|`3Colaborate with Aawastore``|left|482|
 add_spacer|small|
-add_textbox|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
-|left|
+add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
+|left|2278|
 add_spacer|small|
 add_label_with_icon|big|`3Main Commands``|left|5956|
-add_textbox|`1Command : `0/modfly `0( `1enable / disable modfly `0)|left|3522|
-add_textbox|`1Command : `0/dd `0( `1drop dl `0)|left|3522|
-add_textbox|`1Command : `0/db `0( `1drop bgl `0)|left|3522|
-add_textbox|`1Command : `0/dbl `0( `1drop black `0)|left|3522|
-add_textbox|`1Command : `0/spin check `0( `3check is spin real or fake `0)|left|
-add_textbox|`1Command : `0/spin qq `0( `3check qq spin `0)|left|
-add_textbox|`1Command : `0/spin reme `0( `3check reme spin `0)|left|
+add_label_with_icon|small|`0/modfly `0( `1enable / disable modfly `0)|left|3522|
+add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left|3522|
+add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
+add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_label_with_icon|small|`0/dd `0( `1drop dl `0)|left|3522|
+add_label_with_icon|small|`0/db `0( `1drop bgl `0)|left|3522|
+add_label_with_icon|small|`0/dbl `0( `1drop black `0)|left|3522|
+add_label_with_icon|small|`0/spin check `0( `3check is spin real or fake `0)|left|3522|
+add_label_with_icon|small|`0/spin qq `0( `3check qq spin `0)|left|3522|
+add_label_with_icon|small|`0/spin reme `0( `3check reme spin `0)|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Growscan Commands``|left|6016|
 add_spacer|small|
-add_textbox|`1Command : `!/gs|left|
+add_label_with_icon|small|/gs|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Host Commands``|left|758|
 add_spacer|small|
-add_textbox|`1Command : `0/bj `0( `3see total gems collected `0)|left|
-add_textbox|`1Command : `0/setpos1 `0( `3set pos 1 `0)|left|
-add_textbox|`1Command : `0/setposback `0( `3set original pos `0)|left|
-add_textbox|`1Command : `0/pos1 `0( `3go to pos 1 `0)|left|
-add_textbox|`1Command : `0/back `0( `3go to original pos ( setposback ) `0)|left|
+add_label_with_icon|small|`0/bj `0( `3see total gems collected `0)|left|3522|
+add_label_with_icon|small|`0/setpos1 `0( `3set pos 1 `0)|left|3522|
+add_label_with_icon|small|`0/setposback `0( `3set original pos `0)|left|3522|
+add_label_with_icon|small|`0/pos1 `0( `3go to pos 1 `0)|left|3522|
+add_label_with_icon|small|`0/back `0( `3go to original pos ( setposback ) `0)|left|3522|
 add_spacer|small|
-add_url_button||`1Discord Creator : Bexxper``|kr|https://youtube.com|
 add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
 add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
-add_url_button||`1@Dom[Bexxper]``|Verse|@Dom[Bexxper|
+add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
+add_url_button||`2Whatsapp Aawastore``|kr|https://wa.me/6287722814744|
 add_spacer|small|
-add_quick_exit|
+add_button|end_dialog|Continue|
+add_quick_exit
 ]]
     varlist.netid = -1
     SendVarlist(varlist)
@@ -127,7 +154,7 @@ AddCallback("deposit command", "OnPacket", function(type, packet)
       -- Check if the input is a valid number
       if amount and amount > 0 then
           SendPacket(2, "action|dialog_return\ndialog_name|bank_deposit\nbgl_count|" .. amount)
-          SendPacket(2,"action|input\n|text|`1[Discord : Bexxper] `2Successfully `0Depo "..amount.." `1BGL")
+          SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Depo "..amount.." `1BGL")
           return true -- Prevent default chat handling
       else
           log("Invalid amount. Please enter a positive number after /depo.")
@@ -144,14 +171,14 @@ AddCallback("withdraw command", "OnPacket", function(type, packet)
         -- Check if the input is a valid number
         if amount and amount > 0 then
             SendPacket(2, "action|dialog_return\ndialog_name|bank_withdraw\nbgl_count|" .. amount)
-            SendPacket(2,"action|input\n|text|`1[Discord : Bexxper] `2Successfully `0Withdraw "..amount.." `1BGL")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Withdraw "..amount.." `1BGL")
             return true -- Prevent default chat handling
         else
             log("Invalid amount. Please enter a positive number after /wd.")
         end
     end
 end)
----Telephone Convert dl to bgl
+---Telephone change dl to bgl
 local TELEPHONE_X = 0 -- Jangan diubah
 local TELEPHONE_Y = 0 -- Jangan diubah
 local ENABLED = false -- Status script, aktif atau tidak
@@ -180,17 +207,17 @@ AddCallback("fdl_hook", "OnVarlist", Hook)
 
 -- Command untuk mengaktifkan atau menonaktifkan script
 AddCallback("fdl_command", "OnPacket", function(type, packet)
-    if type == 2 and packet:find("action|input\n|text|/fdl") then
+    if type == 2 and packet:find("action|input\n|text|/cdl") then
         ENABLED = not ENABLED -- Toggle status script
         if ENABLED then
-            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `2Converter `0Activated!")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Converter `0Activated!")
         else
-            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `4Converter `0Deactivated!")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `4Converter `0Deactivated!")
         end
         return true
     end
 end)
----Auto buy Champgne
+---Telephone champgne
 local TELEPHONE_X = 0 -- Koordinat X Telephone
 local TELEPHONE_Y = 0 -- Koordinat Y Telephone
 local ENABLED = false  -- Script default nonaktif
@@ -226,47 +253,67 @@ AddCallback("champ_command", "OnPacket", function(type, packet)
     if type == 2 and packet:find("action|input\n|text|/champ") then
         ENABLED = not ENABLED -- Toggle status script
         if ENABLED then
-            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `2Auto Buy Champagne `0Activated!")
+            SendPacket(2,"action|input\n|text|`1[Auto Buy] `2Champagne `0Activated!")
         else
-            SendPacket(2,"action|input\n|text|`1[`bBexxper`1] `4Auto Buy Champagne `0Deactivated!")
+            SendPacket(2,"action|input\n|text|`1[Auto Buy] `4Champagne `0Deactivated!")
         end
         return true
     end
 end)
 
----custom drop dl
+--- Custom Drop DL
 AddCallback("dropdl command", "OnPacket", function(type, packet)
-    -- Check if it's a chat message starting with "/dd"
-    if type == 2 and packet:find("action|input\n|text|/dd") then
-        local message = packet:gsub("action|input\n|text|/dd", "")
-        local amount = tonumber(message)
+  if type == 2 and packet:find("action|input\n|text|/dd") then
+      local message = packet:gsub("action|input\n|text|/dd", ""):gsub("%s+", "")
+      local amount = tonumber(message)
 
-        -- Check if the input is a valid number
-        if amount and amount > 0 then
-            SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|1796|\nitem_count|" .. amount)
-            SendPacket(2,"action|input\n|text|`1[Discord : Bexxper] `2Successfully `0Drop "..amount.." `1DL")
-            return true -- Prevent default chat handling
-        else
-            log("Invalid amount. Please enter a positive number after /dd.")
-        end
-    end
+      if amount and amount > 0 then
+          local InventoryAmount = GetItemCount(1796) -- Ambil jumlah DL sebelum drop
+
+          if InventoryAmount >= amount then
+              SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|1796|\nitem_count|" .. amount)
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1DL")
+              -- Beri jeda agar game memproses pengurangan item
+              Sleep(100)  
+              if GetItemCount(1796) == InventoryAmount - amount then
+                  SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1DL")
+              end
+          else
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Diamond Locks!")
+          end
+      else
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Please enter a valid number after /dd.")
+      end
+
+      return true
+  end
 end)
----custom drop bgl
+--- Custom Drop BGL
 AddCallback("dropbgl command", "OnPacket", function(type, packet)
-    -- Check if it's a chat message starting with "/db"
-    if type == 2 and packet:find("action|input\n|text|/db") then
-        local message = packet:gsub("action|input\n|text|/db", "")
-        local amount = tonumber(message)
+  if type == 2 and packet:find("action|input\n|text|/db") then
+      local message = packet:gsub("action|input\n|text|/db", ""):gsub("%s+", "")
+      local amount = tonumber(message)
 
-        -- Check if the input is a valid number
-        if amount and amount > 0 then
-            SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|7188|\nitem_count|" .. amount)
-            SendPacket(2,"action|input\n|text|`1[Discord : Bexxper] `2Successfully `0Drop "..amount.." `1BGL")
-            return true -- Prevent default chat handling
-        else
-            log("Invalid amount. Please enter a positive number after /db.")
-        end
-    end
+      if amount and amount > 0 then
+          local InventoryAmount = GetItemCount(7188) -- Ambil jumlah BGL sebelum drop
+
+          if InventoryAmount >= amount then
+              SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|7188|\nitem_count|" .. amount)
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1BGL")
+              -- Beri jeda agar game memproses pengurangan item
+              Sleep(100)  
+              if GetItemCount(7188) == InventoryAmount - amount then
+                  SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1BGL")
+              end
+          else
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Blue Gem Locks!")
+          end
+      else
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Please enter a valid number after /db.")
+      end
+
+      return true
+  end
 end)
 ---custom drop black gem lock
 AddCallback("dropblack command", "OnPacket", function(type, packet)
@@ -278,12 +325,56 @@ AddCallback("dropblack command", "OnPacket", function(type, packet)
         -- Check if the input is a valid number
         if amount and amount > 0 then
             SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|11550|\nitem_count|" .. amount)
-            SendPacket(2,"action|input\n|text|`1[Discord : Bexxper] `2Successfully `0Drop "..amount.." `bBLACK")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop "..amount.." `bBLACK")
             return true -- Prevent default chat handling
         else
             log("Invalid amount. Please enter a positive number after /dbl.")
         end
     end
+end)
+---convert black to bgl 
+AddCallback("convertbgl command", "OnPacket", function(type, packet)
+  if type == 2 and packet:find("action|input\n|text|/blue") then
+      local InventoryAmount = GetItemCount(11550) -- Black Gem Lock sebelum convert
+
+      if InventoryAmount > 0 then
+          SendPacket(2, "action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bluegl")
+    SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `bBlack Gem Lock `0to `eBlue Gem Lock!")
+          -- Beri jeda agar game memproses konversi
+          Sleep(100)
+
+          -- Cek apakah Black Gem Lock berkurang setelah konversi
+          if GetItemCount(11550) < InventoryAmount then
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `bBlack Gem Lock `0to `eBlue Gem Lock!")
+          end
+      else
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Black Gem Locks to convert!")
+      end
+      
+      return true
+  end
+end)
+---convert bgl to black 
+AddCallback("convertblgl command", "OnPacket", function(type, packet)
+  if type == 2 and packet:find("action|input\n|text|/cbl") then
+      local InventoryAmount = GetItemCount(7188) -- Blue Gem Lock sebelum konversi
+
+      if InventoryAmount > 0 then
+          SendPacket(2, "action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bgl")
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `eBlue Gem Lock `0to `bBlack Gem Lock!")
+          -- Beri jeda agar game memproses konversi
+          Sleep(100)
+
+          -- Cek apakah Blue Gem Lock berkurang setelah konversi
+          if GetItemCount(7188) < InventoryAmount then
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `eBlue Gem Lock `0to `bBlack Gem Lock!")
+          end
+      else
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Blue Gem Locks to convert!")
+      end
+      
+      return true
+  end
 end)
   function pos1(type, packet)
     if [[
@@ -291,7 +382,7 @@ action|input
 |text|/setpos1]] == packet then
       x_pos1 = math.floor(GetLocal().pos_x / 32)
       y_pos1 = math.floor(GetLocal().pos_y / 32)
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9pos 1 set to `3" .. x_pos1 .. " `9,`3" .. y_pos1)
+      OnConsoleMessage("`0[ `bDOM `0] `9pos 1 set to `3" .. x_pos1 .. " `9,`3" .. y_pos1)
       local var = {}
       var[0] = "OnParticleEffect"
       var[1] = 354
@@ -313,7 +404,7 @@ action|input
 |text|/setpos2]] == packet then
       x_pos2 = math.floor(GetLocal().pos_x / 32)
       y_pos2 = math.floor(GetLocal().pos_y / 32)
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9pos 2 set to `3" .. x_pos2 .. " `9,`3" .. y_pos2)
+      OnConsoleMessage("`0[ `bDOM `0] `9pos 2 set to `3" .. x_pos2 .. " `9,`3" .. y_pos2)
       local var = {}
       var[0] = "OnParticleEffect"
       var[1] = 354
@@ -335,7 +426,7 @@ action|input
 |text|/setpos3]] == packet then
       x_pos3 = math.floor(GetLocal().pos_x / 32)
       y_pos3 = math.floor(GetLocal().pos_y / 32)
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9pos 3 set to `3" .. x_pos3 .. " `9,`3" .. y_pos3)
+      OnConsoleMessage("`0[ `bDOM `0] `9pos 3 set to `3" .. x_pos3 .. " `9,`3" .. y_pos3)
       local var = {}
       var[0] = "OnParticleEffect"
       var[1] = 354
@@ -357,7 +448,7 @@ action|input
 |text|/setpos4]] == packet then
       x_pos4 = math.floor(GetLocal().pos_x / 32)
       y_pos4 = math.floor(GetLocal().pos_y / 32)
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9pos 4 set to `3" .. x_pos4 .. " `9,`3" .. y_pos4)
+      OnConsoleMessage("`0[ `bDOM `0] `9pos 4 set to `3" .. x_pos4 .. " `9,`3" .. y_pos4)
       local var = {}
       var[0] = "OnParticleEffect"
       var[1] = 354
@@ -379,7 +470,7 @@ action|input
 |text|/setposback]] == packet then
       x_posback = math.floor(GetLocal().pos_x / 32)
       y_posback = math.floor(GetLocal().pos_y / 32)
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9host pos set to `3" .. x_posback .. " `9,`3" .. y_posback)
+      OnConsoleMessage("`0[ `bDOM `0] `9host pos set to `3" .. x_posback .. " `9,`3" .. y_posback)
       local var = {}
       var[0] = "OnParticleEffect"
       var[1] = 356
@@ -560,7 +651,7 @@ end_dialog|wrench_modesxd|`0Cancel|`0Okay|
   AddCallback("wm", "OnPacket", wm)
   function Wrench_mode(type, packet)
     if packet:find("buttonClicked|wrench_pull") then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode set to `3pull")
+      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode set to `3pull")
       mode_wm = "pull"
       function Wrench(varlist)
         if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
@@ -575,7 +666,7 @@ action|input
       AddCallback("Wrench", "OnVarlist", Wrench)
       return true
     elseif packet:find("buttonClicked|wrench_kick") then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode set to `3kick")
+      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode set to `3kick")
       mode_wm = "kick"
       function Wrench(varlist)
         if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
@@ -590,7 +681,7 @@ action|input
       AddCallback("Wrench", "OnVarlist", Wrench)
       return true
     elseif packet:find("buttonClicked|wrench_ban") then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode set to `3ban")
+      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode set to `3ban")
       mode_wm = "ban"
       function Wrench(varlist)
         if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
@@ -606,7 +697,7 @@ action|input
       return true
     elseif packet:find("buttonClicked|wrench_off") then
       mode_wm = "off"
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode is `3off")
+      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode is `3off")
       RemoveCallback("Wrench")
       return true
     end
@@ -618,11 +709,11 @@ action|input
 action|input
 |text|/modfly]] == packet then
       if mod_fly == false then
-        OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9mod fly is now `3enabled")
+        OnConsoleMessage("`0[ `bDOM `0] `9mod fly is now `3enabled")
         EditToggle("ModFly", true)
         mod_fly = true
       elseif mod_fly == true then
-        OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9mod fly is now `3disabled")
+        OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9mod fly is now `3disabled")
         EditToggle("ModFly", false)
         mod_fly = false
       end
@@ -635,10 +726,10 @@ action|input
 action|input
 |text|/bj]] == packet then
       if gems_checker then
-        OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9BJ gems checker is `3off")
+        OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9BJ gems checker is `3off")
         gems_checker = false
       else
-        OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9BJ gems checker is `3on")
+        OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9BJ gems checker is `3on")
         gems_checker = true
       end
       RunThread(function()
@@ -671,7 +762,7 @@ action|input
 action|input
 |text|/wp]] == packet then
       mode_wm = "pull"
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode set to `3pull")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode set to `3pull")
       function Wrench(varlist)
         if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
           x = varlist[1]:removeColors()
@@ -692,7 +783,7 @@ action|input
 action|input
 |text|/wk]] == packet then
       mode_wm = "kick"
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode set to `3kick")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode set to `3kick")
       function Wrench(varlist)
         if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
           x = varlist[1]:removeColors()
@@ -713,7 +804,7 @@ action|input
 action|input
 |text|/wb]] == packet then
       mode_wm = "ban"
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode set to `3ban")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode set to `3ban")
       function Wrench(varlist)
         if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
           x = varlist[1]:removeColors()
@@ -734,7 +825,7 @@ action|input
 action|input
 |text|/woff]] == packet then
       mode_wm = "off"
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9wrench mode is now `3off")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode is now `3off")
       RemoveCallback("Wrench")
       return true
     end
@@ -767,7 +858,7 @@ end_dialog|grow_scaxn|`0Cancel|`0Okay|
   AddCallback("gs_xd", "OnPacket", gs_xd)
   function growscan_mode(type, packet)
     if packet:find("buttonClicked|placed_gs") then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Scaning placed blocks")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Scaning placed blocks")
       function round(n)
         return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
       end
@@ -812,7 +903,7 @@ end_dialog|grow_scan|`0Okay|`0Back|
       SendVarlist(varlist)
       return true
     elseif packet:find("buttonClicked|float_gs") then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Scaning dropped items")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Scaning dropped items")
       function round(n)
         return n % 1 >= 0.5 and math.ceil(n) or math.floor(n)
       end
@@ -876,7 +967,7 @@ end_dialog|grow_scaxn|`0Cancel|`0Okay|
     if [[
 action|input
 |text|/fc]] == packet then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Closing proxy.")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Closing proxy.")
       RemoveCallbacks()
       return true
     end
@@ -900,7 +991,7 @@ action|input
     if [[
 action|input
 |text|/spin all]] == packet then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Spin mode set to `3QQ & REME")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3QQ & REME")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -943,7 +1034,7 @@ action|input
     if [[
 action|input
 |text|/spin qq]] == packet then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Spin mode set to `3QQ")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3QQ")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -985,7 +1076,7 @@ action|input
     if [[
 action|input
 |text|/spin reme]] == packet then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Spin mode set to `3REME")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3REME")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -1027,7 +1118,7 @@ action|input
     if [[
 action|input
 |text|/spin check]] == packet then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Spin mode set to `3Checker")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3Checker")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -1044,7 +1135,7 @@ action|input
             var = {}
             var[0] = "OnTalkBubble"
             var[1] = varlist[1]
-            var[2] = "`0[ `2REAL `0] " .. varlist[2]
+            var[2] = "`0[`b[ DOM ]`0] `0[ `2REAL `0] " .. varlist[2]
             var[3] = -1
             var.netid = -1
             SendVarlist(var)
@@ -1068,21 +1159,21 @@ action|input
   function check_drops(varlist)
     if "OnConsoleMessage" == varlist[0] and varlist[1]:find("Collected `w") then
       collectingxd = varlist[1]:removeColors()
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9" .. collectingxd)
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9" .. collectingxd)
       return true
     end
   end
   AddCallback("check_drops", "OnVarlist", check_drops)
   function check_login(varlist)
     if "OnConsoleMessage" == varlist[0] and varlist[1]:find("Welcome back,") then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Player Authentication `2Successful.")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Player Authentication `2Successful.")
       return true
     end
   end
   AddCallback("check_login", "OnVarlist", check_login)
   function today_date(varlist)
     if "OnTodaysDate" == varlist[0] then
-      OnConsoleMessage("`0[ `3Discord : Bexxper `0] `9Todays date : `3" .. varlist[2] .. " `9/ `3" .. varlist[4])
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Todays date : `3" .. varlist[2] .. " `9/ `3" .. varlist[4])
       return true
     end
   end
@@ -1099,5 +1190,5 @@ action|input
     print("")
   end
   print("Thanks for using this proxy")
-  print("Discord : Bexxper")
+  print("Dom")
 end
