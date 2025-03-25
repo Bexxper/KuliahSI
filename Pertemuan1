@@ -151,6 +151,45 @@ AddCallback("withdraw command", "OnPacket", function(type, packet)
         end
     end
 end)
+---Telephone Convert dl to bgl
+local TELEPHONE_X = 0 -- Jangan diubah
+local TELEPHONE_Y = 0 -- Jangan diubah
+local ENABLED = false -- Status script, aktif atau tidak
+
+-- Fungsi untuk mengubah 100 DL menjadi 1 BGL
+function ConvertDLtoBGL()
+   if TELEPHONE_X ~= 0 and TELEPHONE_Y ~= 0 then
+      if GetItemCount(1796) >= 100 then  -- Cek apakah memiliki 100 DL
+         -- Mengubah 100 DL menjadi 1 BGL
+         SendPacket(2, "action|dialog_return\ndialog_name|telephone\nnum|53785|\nx|"..TELEPHONE_X.."|\ny|"..TELEPHONE_Y.."|\nbuttonClicked|bglconvert")
+      end
+   end
+end
+
+-- Hook untuk mendeteksi wrench Telephone saat script aktif
+function Hook(varlist)
+   if ENABLED and varlist[0] == "OnDialogRequest" and varlist[1]:find("Telephone") then
+      TELEPHONE_X = varlist[1]:match('embed_data|x|(%d+)') or TELEPHONE_X
+      TELEPHONE_Y = varlist[1]:match('embed_data|y|(%d+)') or TELEPHONE_Y
+      ConvertDLtoBGL()
+      return true
+   end
+end
+
+AddCallback("fdl_hook", "OnVarlist", Hook)
+
+-- Command untuk mengaktifkan atau menonaktifkan script
+AddCallback("fdl_command", "OnPacket", function(type, packet)
+    if type == 2 and packet:find("action|input\n|text|/fdl") then
+        ENABLED = not ENABLED -- Toggle status script
+        if ENABLED then
+            SendPacket(2,"action|input\n|text|`1[Auto BGL] `2Converter `0Activated!")
+        else
+            SendPacket(2,"action|input\n|text|`1[Auto BGL] `4Converter `0Deactivated!")
+        end
+        return true
+    end
+end)
 ---custom drop dl
 AddCallback("dropdl command", "OnPacket", function(type, packet)
     -- Check if it's a chat message starting with "/dd"
