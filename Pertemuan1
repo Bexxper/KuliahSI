@@ -15,8 +15,8 @@ function OnConsoleMessage(text)
   var.netid = -1
   SendVarlist(var)
 end
-OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] Proxy by @Dom")
-OnTextOverlay("`2Proxy by @Dom/Bexxper")
+OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] Proxy by `4Bexxper")
+OnTextOverlay("`2Proxy by Bexxper")
 local function Dialog()
   local var = {}
   var[0] = "OnDialogRequest"
