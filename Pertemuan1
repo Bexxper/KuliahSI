@@ -279,7 +279,7 @@ AddCallback("dropdl command", "OnPacket", function(type, packet)
                   SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1DL")
               end
           else
-              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Diamond Locks!")
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough `1Diamond Locks`4!")
           end
       else
           SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Please enter a valid number after /dd.")
@@ -290,8 +290,8 @@ AddCallback("dropdl command", "OnPacket", function(type, packet)
 end)
 --- Custom Drop BGL
 AddCallback("dropbgl command", "OnPacket", function(type, packet)
-  if type == 2 and packet:find("action|input\n|text|/db") then
-      local message = packet:gsub("action|input\n|text|/db", ""):gsub("%s+", "")
+  if type == 2 and packet:find("action|input\n|text|/db ") then -- Tambahkan spasi agar tidak menangkap "/dbl"
+      local message = packet:match("/db%s+(%d+)") -- Ambil hanya angka setelah "/db"
       local amount = tonumber(message)
 
       if amount and amount > 0 then
@@ -300,13 +300,8 @@ AddCallback("dropbgl command", "OnPacket", function(type, packet)
           if InventoryAmount >= amount then
               SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|7188|\nitem_count|" .. amount)
               SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1BGL")
-              -- Beri jeda agar game memproses pengurangan item
-              Sleep(100)  
-              if GetItemCount(7188) == InventoryAmount - amount then
-                  SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1BGL")
-              end
           else
-              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Blue Gem Locks!")
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough `eBlue Gem Locks`4!")
           end
       else
           SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Please enter a valid number after /db.")
@@ -315,67 +310,83 @@ AddCallback("dropbgl command", "OnPacket", function(type, packet)
       return true
   end
 end)
----custom drop black gem lock
-AddCallback("dropblack command", "OnPacket", function(type, packet)
-    -- Check if it's a chat message starting with "/dbl"
-    if type == 2 and packet:find("action|input\n|text|/dbl") then
-        local message = packet:gsub("action|input\n|text|/dbl", "")
-        local amount = tonumber(message)
 
-        -- Check if the input is a valid number
-        if amount and amount > 0 then
-            SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|11550|\nitem_count|" .. amount)
-            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop "..amount.." `bBLACK")
-            return true -- Prevent default chat handling
-        else
-            log("Invalid amount. Please enter a positive number after /dbl.")
-        end
-    end
+--- Custom Drop Black Gem Lock
+AddCallback("dropblack command", "OnPacket", function(type, packet)
+  if type == 2 and packet:find("action|input\n|text|/dbl ") then -- Pastikan hanya menangkap "/dbl" dengan spasi
+      local message = packet:match("/dbl%s+(%d+)") -- Ambil hanya angka setelah "/dbl"
+      local amount = tonumber(message)
+
+      if amount and amount > 0 then
+          local InventoryAmount = GetItemCount(11550) -- Ambil jumlah Black Gem Lock sebelum drop
+
+          if InventoryAmount >= amount then
+              SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|11550|\nitem_count|" .. amount)
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `bBLACK")
+          else
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough `bBlack Gem Locks`4!")
+          end
+      else
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Please enter a valid number after /dbl.")
+      end
+
+      return true
+  end
 end)
----convert black to bgl 
+
+--- Convert Black Gem Lock to Blue Gem Lock
 AddCallback("convertbgl command", "OnPacket", function(type, packet)
   if type == 2 and packet:find("action|input\n|text|/blue") then
-      local InventoryAmount = GetItemCount(11550) -- Black Gem Lock sebelum convert
-
-      if InventoryAmount > 0 then
-          SendPacket(2, "action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bluegl")
-    SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `bBlack Gem Lock `0to `eBlue Gem Lock!")
-          -- Beri jeda agar game memproses konversi
-          Sleep(100)
-
-          -- Cek apakah Black Gem Lock berkurang setelah konversi
-          if GetItemCount(11550) < InventoryAmount then
-              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `bBlack Gem Lock `0to `eBlue Gem Lock!")
+      local BlackInventory = GetItemCount(11550) -- Jumlah Black Gem Lock sebelum konversi
+      local BlueInventory = GetItemCount(7188) -- Jumlah Blue Gem Lock sebelum konversi
+      
+      if BlackInventory > 0 then
+          if BlueInventory <= 150 then
+              SendPacket(2, "action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bluegl")
+              
+              -- Cek apakah Black Gem Lock benar-benar berkurang setelah konversi
+              Sleep(100)
+              if GetItemCount(11550) < BlackInventory then
+                  SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Conversion failed! Black Gem Lock did not decrease.")
+              else
+                  SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `bBlack Gem Lock `0to `eBlue Gem Lock!")
+              end
+          else
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Conversion failed! Blue Gem Lock exceeds 150.")
           end
       else
-          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Black Gem Locks to convert!")
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough `bBlack Gem Locks to convert`4!")
       end
       
       return true
   end
 end)
----convert bgl to black 
+
+--- Convert Blue Gem Lock to Black Gem Lock
 AddCallback("convertblgl command", "OnPacket", function(type, packet)
   if type == 2 and packet:find("action|input\n|text|/cbl") then
-      local InventoryAmount = GetItemCount(7188) -- Blue Gem Lock sebelum konversi
-
-      if InventoryAmount > 0 then
+      local InventoryAmount = GetItemCount(7188) -- Jumlah Blue Gem Lock sebelum konversi
+      
+      if InventoryAmount >= 100 then
           SendPacket(2, "action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bgl")
-          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `eBlue Gem Lock `0to `bBlack Gem Lock!")
+          
           -- Beri jeda agar game memproses konversi
           Sleep(100)
 
-          -- Cek apakah Blue Gem Lock berkurang setelah konversi
-          if GetItemCount(7188) < InventoryAmount then
-              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `eBlue Gem Lock `0to `bBlack Gem Lock!")
+          -- Cek apakah 100 BGL benar-benar berkurang setelah konversi
+          if GetItemCount(7188) <= InventoryAmount - 100 then
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Conversion failed! Not enough Blue Gem Locks.")
+          else
+              SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `e100 Blue Gem Locks `0to `bBlack Gem Lock!")
           end
       else
-          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Blue Gem Locks to convert!")
+          SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Not enough Blue Gem Locks! Need at least 100 to convert.")
       end
       
       return true
   end
 end)
+
   function pos1(type, packet)
     if [[
 action|input
