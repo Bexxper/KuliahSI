@@ -32,13 +32,15 @@ add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. "
 |left|2278|
 add_spacer|small|
 add_label_with_icon|medium|`0Log Update``|left|3524|
+add_label_with_icon|small|`0/spamset `2( Setting Text to `4SPAM `0)|left|3522|
+add_label_with_icon|small|`0/spam `2( enable / disable SPAM )|left|3522|
 add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left|3522|
 add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
 add_spacer|small|
 add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
-add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/X9y9AXVzrp|
+add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
 add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
 add_url_button||`2Whatsapp Aawastore``|kr|https://wa.me/6287722814744|
 add_spacer|small|
@@ -94,8 +96,6 @@ add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left
 add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
-add_label_with_icon|small|`0/depo `2( Deposit `eBGL `2to `bBank )|left|3522|
-add_label_with_icon|small|`0/wd `2( Withdraw `eBGL `2to `bBackpack )|left|3522|
 add_label_with_icon|small|`0/dd `0( `1drop dl `0)|left|3522|
 add_label_with_icon|small|`0/db `0( `1drop bgl `0)|left|3522|
 add_label_with_icon|small|`0/dbl `0( `1drop black `0)|left|3522|
@@ -162,6 +162,55 @@ AddCallback("deposit command", "OnPacket", function(type, packet)
           log("Invalid amount. Please enter a positive number after /depo.")
       end
   end
+end)
+---wrench pull 
+
+---AUTO SPAM FUNCTION
+local spamText = ""
+local spamDelay = 1000 -- Default 1 detik
+local isSpamming = false
+
+-- Fungsi untuk menangkap perintah /spamset dengan deteksi yang lebih akurat
+AddCallback("spamset_command", "OnPacket", function(type, packet)
+    if type == 2 and packet:match("action|input\n|text|/spamset ") then
+        local args = packet:match("action|input\n|text|/spamset (.+)")
+        if args then
+            local text, delay = args:match("(.+) (%d+)")
+            if text and delay then
+                spamText = text
+                spamDelay = tonumber(delay)
+                SendPacket(2, "action|input\n|text|[`b[DOM]`0] `2Spam text set to:`0 " .. spamText .. " `2with delay:`0 " .. spamDelay .. "ms")
+            else
+                SendPacket(2, "action|input\n|text|[`b[DOM]`0] `4Invalid format! Use: /spamset (text) (delay in ms)")
+            end
+        end
+        return true
+    end
+end)
+
+-- Fungsi untuk menangkap perintah /spam secara terpisah
+AddCallback("spam_command", "OnPacket", function(type, packet)
+    if type == 2 and packet:match("action|input\n|text|/spam$") then
+        if spamText == "" then
+            SendPacket(2, "action|input\n|text|[`b[DOM]`0] `4You must set spam text first using /spamset!")
+            return true
+        end
+
+        -- Toggle spam on/off
+        isSpamming = not isSpamming
+        if isSpamming then
+            SendPacket(2, "action|input\n|text|[`b[DOM]`0] `2Spam started! Text:`0 " .. spamText)
+            RunThread(function()
+                while isSpamming do
+                    SendPacket(2, "action|input\n|text|" .. spamText)
+                    Sleep(spamDelay)
+                end
+            end)
+        else
+            SendPacket(2, "action|input\n|text|[`b[DOM]`0] `4Spam stopped!")
+        end
+        return true
+    end
 end)
 ---withdraw bgl
 AddCallback("withdraw command", "OnPacket", function(type, packet)
@@ -564,158 +613,6 @@ action|input
     end
   end
   AddCallback("tp_pos4", "OnPacket", tp_pos4)
-  mode_wm = "off"
-  function wm(type, packet)
-    if [[
-action|input
-|text|/wm]] == packet then
-      if mode_wm == "off" then
-        type_wm = "`4Disabled"
-      else
-        type_wm = "`2Enabled"
-      end
-      if type_wm == "`2Enabled" and mode_wm == "pull" then
-        varlist = {}
-        varlist[0] = "OnDialogRequest"
-        varlist[1] = [[
-set_default_color|`o
-add_label_with_icon|big|`!Wrench Mode|left|32|
-add_spacer|small
-add_textbox|`9Currently Wrench Mode is `2Enabled `9And is Set To : `3]] .. mode_wm .. [[
-|left|
-add_spacer|small
-add_button_with_icon|wrench_pull|  `9pull  |staticYellowFrame|32|
-add_button_with_icon|wrench_kick|  `9kick  |staticBlueFrame|32|
-add_button_with_icon|wrench_ban|  `9ban  |staticBlueFrame|32|
-add_button_with_icon||END_LIST|noflags|0|0|
-add_spacer|small
-add_button|wrench_off|`@Turn off wrench mode|noflags|0|0|
-add_quick_exit|
-end_dialog|wrench_modesxd|`0Cancel|`0Okay|
-]]
-        varlist.netid = -1
-        SendVarlist(varlist)
-      elseif type_wm == "`2Enabled" and mode_wm == "kick" then
-        varlist = {}
-        varlist[0] = "OnDialogRequest"
-        varlist[1] = [[
-set_default_color|`o
-add_label_with_icon|big|`!Wrench Mode|left|32|
-add_spacer|small
-add_textbox|`9Currently Wrench Mode is `2Enabled `9And is Set To : `3]] .. mode_wm .. [[
-|left|
-add_spacer|small
-add_button_with_icon|wrench_pull|  `9pull  |staticBlueFrame|32|
-add_button_with_icon|wrench_kick|  `9kick  |staticYellowFrame|32|
-add_button_with_icon|wrench_ban|  `9ban  |staticBlueFrame|32|
-add_button_with_icon||END_LIST|noflags|0|0|
-add_spacer|small
-add_button|wrench_off|`@Turn off wrench mode|noflags|0|0|
-add_quick_exit|
-end_dialog|wrench_modesxd|`0Cancel|`0Okay|
-]]
-        varlist.netid = -1
-        SendVarlist(varlist)
-      elseif type_wm == "`2Enabled" and mode_wm == "ban" then
-        varlist = {}
-        varlist[0] = "OnDialogRequest"
-        varlist[1] = [[
-set_default_color|`o
-add_label_with_icon|big|`!Wrench Mode|left|32|
-add_spacer|small
-add_textbox|`9Currently Wrench Mode is `2Enabled `9And is Set To : `3]] .. mode_wm .. [[
-|left|
-add_spacer|small
-add_button_with_icon|wrench_pull|  `9pull  |staticBlueFrame|32|
-add_button_with_icon|wrench_kick|  `9kick  |staticBlueFrame|32|
-add_button_with_icon|wrench_ban|  `9ban  |staticYellowFrame|32|
-add_button_with_icon||END_LIST|noflags|0|0|
-add_spacer|small
-add_button|wrench_off|`@Turn off wrench mode|noflags|0|0|
-add_quick_exit|
-end_dialog|wrench_modesxd|`0Cancel|`0Okay|
-]]
-        varlist.netid = -1
-        SendVarlist(varlist)
-      else
-        varlist = {}
-        varlist[0] = "OnDialogRequest"
-        varlist[1] = [[
-set_default_color|`o
-add_label_with_icon|big|`!Wrench Mode|left|32|
-add_spacer|small
-add_textbox|`9Currently Wrench Mode is `4Disabled|left|
-add_spacer|small
-add_button_with_icon|wrench_pull|  `9pull  |staticBlueFrame|32|
-add_button_with_icon|wrench_kick|  `9kick  |staticBlueFrame|32|
-add_button_with_icon|wrench_ban|  `9ban  |staticBlueFrame|32|
-add_button_with_icon||END_LIST|noflags|0|0|
-add_spacer|small
-add_button|wrench_off|`@Turn off wrench mode|noflags|0|0|
-add_quick_exit|
-end_dialog|wrench_modesxd|`0Cancel|`0Okay|
-]]
-        varlist.netid = -1
-        SendVarlist(varlist)
-      end
-      return true
-    end
-  end
-  AddCallback("wm", "OnPacket", wm)
-  function Wrench_mode(type, packet)
-    if packet:find("buttonClicked|wrench_pull") then
-      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode set to `3pull")
-      mode_wm = "pull"
-      function Wrench(varlist)
-        if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
-          x = varlist[1]:removeColors()
-          x2 = x:match("add_label_with_icon|big|(%w+)")
-          SendPacket(2, [[
-action|input
-|text|/pull ]] .. x2)
-          return true
-        end
-      end
-      AddCallback("Wrench", "OnVarlist", Wrench)
-      return true
-    elseif packet:find("buttonClicked|wrench_kick") then
-      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode set to `3kick")
-      mode_wm = "kick"
-      function Wrench(varlist)
-        if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
-          x = varlist[1]:removeColors()
-          x2 = x:match("add_label_with_icon|big|(%w+)")
-          SendPacket(2, [[
-action|input
-|text|/kick ]] .. x2)
-          return true
-        end
-      end
-      AddCallback("Wrench", "OnVarlist", Wrench)
-      return true
-    elseif packet:find("buttonClicked|wrench_ban") then
-      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode set to `3ban")
-      mode_wm = "ban"
-      function Wrench(varlist)
-        if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
-          x = varlist[1]:removeColors()
-          x2 = x:match("add_label_with_icon|big|(%w+)")
-          SendPacket(2, [[
-action|input
-|text|/ban ]] .. x2)
-          return true
-        end
-      end
-      AddCallback("Wrench", "OnVarlist", Wrench)
-      return true
-    elseif packet:find("buttonClicked|wrench_off") then
-      mode_wm = "off"
-      OnConsoleMessage("`0[ `bDOM `0] `9wrench mode is `3off")
-      RemoveCallback("Wrench")
-      return true
-    end
-  end
-  AddCallback("Wrench_mode", "OnPacket", Wrench_mode)
   mod_fly = false
   function modfly(type, packet)
     if [[
@@ -770,80 +667,6 @@ action|input
       end
     end
   end
-  function wp(type, packet)
-    if [[
-action|input
-|text|/wp]] == packet then
-      mode_wm = "pull"
-      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode set to `3pull")
-      function Wrench(varlist)
-        if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
-          x = varlist[1]:removeColors()
-          x2 = x:match("add_label_with_icon|big|(%w+)")
-          SendPacket(2, [[
-action|input
-|text|/pull ]] .. x2)
-          return true
-        end
-      end
-      AddCallback("Wrench", "OnVarlist", Wrench)
-      return true
-    end
-  end
-  AddCallback("wp", "OnPacket", wp)
-  function wk(type, packet)
-    if [[
-action|input
-|text|/wk]] == packet then
-      mode_wm = "kick"
-      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode set to `3kick")
-      function Wrench(varlist)
-        if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
-          x = varlist[1]:removeColors()
-          x2 = x:match("add_label_with_icon|big|(%w+)")
-          SendPacket(2, [[
-action|input
-|text|/kick ]] .. x2)
-          return true
-        end
-      end
-      AddCallback("Wrench", "OnVarlist", Wrench)
-      return true
-    end
-  end
-  AddCallback("wk", "OnPacket", wk)
-  function wb(type, packet)
-    if [[
-action|input
-|text|/wb]] == packet then
-      mode_wm = "ban"
-      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode set to `3ban")
-      function Wrench(varlist)
-        if "OnDialogRequest" == varlist[0] and varlist[1]:find("add_button|report_player|") then
-          x = varlist[1]:removeColors()
-          x2 = x:match("add_label_with_icon|big|(%w+)")
-          SendPacket(2, [[
-action|input
-|text|/ban ]] .. x2)
-          return true
-        end
-      end
-      AddCallback("Wrench", "OnVarlist", Wrench)
-      return true
-    end
-  end
-  AddCallback("wb", "OnPacket", wb)
-  function woff(type, packet)
-    if [[
-action|input
-|text|/woff]] == packet then
-      mode_wm = "off"
-      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9wrench mode is now `3off")
-      RemoveCallback("Wrench")
-      return true
-    end
-  end
-  AddCallback("woff", "OnPacket", woff)
   function gs_xd(type, packet)
     if [[
 action|input
