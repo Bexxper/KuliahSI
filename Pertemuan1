@@ -96,7 +96,8 @@ add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left
 add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
-add_label_with_icon|small|`0/dd `0( `1drop dl `0)|left|3522|
+add_label_with_icon|small|`0/depo `2( Deposit `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/wd `2( Withdraw `eBGL `0)|left|3522|
 add_label_with_icon|small|`0/db `0( `1drop bgl `0)|left|3522|
 add_label_with_icon|small|`0/dbl `0( `1drop black `0)|left|3522|
 add_label_with_icon|small|`0/spin check `0( `3check is spin real or fake `0)|left|3522|
