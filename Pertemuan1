@@ -1,6 +1,7 @@
 --- Proxy made by @Dom
 --- Recomend Using Gpai
 --- Ketauan jual script ini pukul ditempat baru dipolisikan
+SendPacket(2,"action|input\n|text|/radio")
 function OnTextOverlay(text)
   var = {}
   var[0] = "OnTextOverlay"
@@ -828,7 +829,8 @@ action|input
     if [[
 action|input
 |text|/spin all]] == packet then
-      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3QQ & REME")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3QEME & REME")
+      OnTextOverlay("`9Spin mode will show ALL Game")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -845,7 +847,7 @@ action|input
             var = {}
             var[0] = "OnTalkBubble"
             var[1] = varlist[1]
-            var[2] = "`0[ `bBexxper `0] `9CSN : `3" .. x2 .. " `0x `9QEME : `3" .. qq_mode .. " `0x `9REME : `3" .. reme_mode
+            var[2] = "`0[ [`b[ DOM ]`0] `0] `9CSN : `3" .. x2 .. " `0x `9QEME : `3" .. qq_mode .. " `0x `9REME : `3" .. reme_mode
             var[3] = -1
             var.netid = -1
             SendVarlist(var)
@@ -871,7 +873,8 @@ action|input
     if [[
 action|input
 |text|/spin qq]] == packet then
-      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3QQ")
+      OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3QEME")
+      OnTextOverlay("`9Spin mode set to `2QEME")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -888,7 +891,7 @@ action|input
             var = {}
             var[0] = "OnTalkBubble"
             var[1] = varlist[1]
-            var[2] = varlist[2] .. " `9QQ : `3" .. qq_mode
+            var[2] = varlist[2] .. " `0[`b[ DOM ]`0] `0[`2REAL`0] `1QEME : `9" .. qq_mode
             var[3] = -1
             var.netid = -1
             SendVarlist(var)
@@ -909,11 +912,13 @@ action|input
     end
   end
   AddCallback("qq_spin", "OnPacket", qq_spin)
+  
   function reme_spin(type, packet)
     if [[
 action|input
 |text|/spin reme]] == packet then
       OnConsoleMessage("`0[ [`b[ DOM ]`0] `0] `9Spin mode set to `3REME")
+      OnTextOverlay("`9Spin mode set to `2REME")
       function Spin_checker(varlist)
         if "OnTalkBubble" == varlist[0] and -1 ~= varlist[3] and varlist[2]:find("spun the wheel and got") then
           text = ""
@@ -930,7 +935,7 @@ action|input
             var = {}
             var[0] = "OnTalkBubble"
             var[1] = varlist[1]
-            var[2] = varlist[2] .. " `2REME : `3" .. reme_mode
+            var[2] = varlist[2] .. " `0[`b[ DOM ]`0] `0[`2REAL`0] `1REME : `9" .. reme_mode
             var[3] = -1
             var.netid = -1
             SendVarlist(var)
@@ -951,6 +956,7 @@ action|input
     end
   end
   AddCallback("reme_spin", "OnPacket", reme_spin)
+  
   function check_spin(type, packet)
     if [[
 action|input
