@@ -1,0 +1,96 @@
+function ProxyOpen()
+    opening = [[
+set_default_color|`o
+add_label_with_icon|big|`0Proxy [`b[ DOM ]`0] `0[CPS]``|left|7340|
+add_spacer|small|
+add_label_with_icon|small|Proxy Version : `0V1.0``|left|10794|
+add_label_with_icon|small|Application : `1BotHax `0/ `4B'INTERNAL``|left|10794|
+add_label_with_icon|small|Device : PC / Windows``|left|10794|
+add_label_with_icon|small|`3Collaborate with Aawastore``|left|10794|
+add_label_with_icon|small|`0/proxy `1To see All Feature``|left|10794|
+add_spacer|small|
+add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
+|left|2278|
+add_spacer|small|
+add_label_with_icon|medium|`0Log Update``|left|3524|
+add_label_with_icon|small|`0/spamset `2( Setting Text to `4SPAM `0)|left|3522|
+add_label_with_icon|small|`0/spam `2( enable / disable SPAM )|left|3522|
+add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left|3522|
+add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
+add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_spacer|small|
+add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
+add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
+add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
+add_url_button||`2Whatsapp Aawastore``|kr|https://wa.me/6287722814744|
+add_spacer|small|
+add_button|end_dialog|Continue|
+add_quick_exit
+]]
+    SendVariantList({ [0] = "OnDialogRequest", [1] = opening })
+    end
+    ProxyOpen()
+function ProxyCommand()
+    cmd = [[
+set_default_color|`o
+add_label_with_icon|big|`0Proxy [`b[ DOM ]`0] `0[CPS]``|left|7340|
+add_spacer|small|
+add_label_with_icon|small|Proxy Version : `0V1.0``|left|10794|
+add_label_with_icon|small|Application : `4Growpai``|left|10794|
+add_label_with_icon|small|Device : PC / Windows``|left|10794|
+add_label_with_icon|small|`3Collaborate with Aawastore``|left|10794|
+add_label_with_icon|small|`0/proxy `1To see All Feature``|left|10794|
+add_label_with_icon|small|`bTiktok `0: futirrr``|left|10794|
+add_spacer|small|
+add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
+|left|2278|
+add_spacer|small|
+add_label_with_icon|big|`3Main Commands``|left|5956|
+add_label_with_icon|small|`0/modfly `0( `1enable / disable modfly `0)|left|3522|
+add_label_with_icon|small|`0/champ `2( enable / disable Auto buy champgne )|left|3522|
+add_label_with_icon|small|`0/cdl `2( enable / disable Convert Diamond Lock to `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
+add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_label_with_icon|small|`0/depo `2( Deposit `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/wd `2( Withdraw `eBGL `0)|left|3522|
+add_label_with_icon|small|`0/db `0( `1drop bgl `0)|left|3522|
+add_label_with_icon|small|`0/dbl `0( `1drop black `0)|left|3522|
+add_label_with_icon|small|`0/spin check `0( `3check is spin real or fake `0)|left|3522|
+add_label_with_icon|small|`0/spin qq `0( `3check qq spin `0)|left|3522|
+add_label_with_icon|small|`0/spin reme `0( `3check reme spin `0)|left|3522|
+add_spacer|small|
+add_label_with_icon|big|`3Growscan Commands``|left|6016|
+add_spacer|small|
+add_label_with_icon|small|/gs|left|3522|
+add_spacer|small|
+add_label_with_icon|big|`3Host Commands``|left|758|
+add_spacer|small|
+add_label_with_icon|small|`0/bj `0( `3see total gems collected `0)|left|3522|
+add_label_with_icon|small|`0/setpos1 `0( `3set pos 1 `0)|left|3522|
+add_label_with_icon|small|`0/setposback `0( `3set original pos `0)|left|3522|
+add_label_with_icon|small|`0/pos1 `0( `3go to pos 1 `0)|left|3522|
+add_label_with_icon|small|`0/back `0( `3go to original pos ( setposback ) `0)|left|3522|
+add_spacer|small|
+add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
+add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
+add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
+add_url_button||`2Whatsapp Aawastore``|kr|https://wa.me/6287722814744|
+add_spacer|small|
+add_button|end_dialog|Continue|
+add_quick_exit
+]]
+SendVariantList({ [0] = "OnDialogRequest", [1] = cmd })
+end
+
+function ovl(str)
+SendVariantList({ [0] = "OnTextOverlay", [1] = str })
+end
+
+AddHook("onsendpacket", function(type, packet)
+    if packet:find("/proxy") then
+        ProxyCommand()
+        return true
+    end
+end)
+
