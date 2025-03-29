@@ -27,6 +27,7 @@ function loginwebhook()
     }]])
 end
 loginwebhook()
+SendPacket(2, "action|input\n|text|`2Successfully loaded `0[`b[ DOM ]`0] `9Proxy")
 function ProxyOpen()
     opening = [[
 set_default_color|`o
