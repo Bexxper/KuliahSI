@@ -5,33 +5,40 @@ function bersih(str)
     return cleanedStr
 end
 function loginwebhook()
-    MakeRequest("https://discord.com/api/webhooks/1355237111015538729/xuEEIiu0eehjXJOwl-wMduQ14LykN4lRXmbW_67WGKeX6Kq1tcZUX41n3Ebn_XnhXcx8",
-    "POST",
-    {["Content-Type"] = "application/json"},
-    [[{
-        "embeds": [{
-            "title": "SUCCESSFULLY LOAD PROXY",
-            "color": 15258701,
-            "fields": [{
-                "name": ":green_circle: Authorized Account",
-                "value": ":detective: Growid : ]] .. bersih(GetLocal().name) .. [[\u000A:identification_card: UID : ]] ..GetLocal().userid.. [[\u000A:earth_asia: World : ]]..GetWorld().name..[[\nBlue Gem Locks : ]] .. BGL .. [[\nBlack Gem Locks : ]] .. BLCK .. [[",
-                "inline": false
-            }],
-            "thumbnail": {
-            "url": "https://cdn.discordapp.com/attachments/1046936807767560196/1351776018444062804/image.png?ex=67e8ca05&is=67e77885&hm=4ceab6c5f076f55e4ef69e3c741965ce3a83873d1ecdb11dcc1d56808f684054&"
-            },
-            "footer": {
-                "text": "DATE | TIME : ]] .. os.date("%d-%m-%Y | %H:%M:%S | ") .. [[ ",
-                "icon_url": "https://cdn.discordapp.com/attachments/1046936807767560196/1351776018444062804/image.png"
-            }
-        }]
-    }]])
+    local success, err = pcall(function()
+        MakeRequest("https://discord.com/api/webhooks/1355237111015538729/xuEEIiu0eehjXJOwl-wMduQ14LykN4lRXmbW_67WGKeX6Kq1tcZUX41n3Ebn_XnhXcx8",
+        "POST",
+        { ["Content-Type"] = "application/json" },
+        [[{
+            "embeds": [{
+                "title": "SUCCESSFULLY LOAD PROXY",
+                "color": 15258701,
+                "fields": [{
+                    "name": ":green_circle: Authorized Account",
+                    "value": ":detective: Growid : ]] .. bersih(GetLocal().name) .. [[\n:identification_card: UID : ]] .. GetLocal().userid .. [[\n:earth_asia: World : ]] .. GetWorld().name .. [[\nBlue Gem Locks : ]] .. BGL .. [[\nBlack Gem Locks : ]] .. BLCK .. [[",
+                    "inline": false
+                }],
+                "thumbnail": {
+                    "url": "https://cdn.discordapp.com/attachments/1046936807767560196/1351776018444062804/image.png"
+                },
+                "footer": {
+                    "text": "DATE | TIME : ]] .. os.date("%d-%m-%Y | %H:%M:%S | ") .. [[",
+                    "icon_url": "https://cdn.discordapp.com/attachments/1046936807767560196/1351776018444062804/image.png"
+                }
+            }]
+        }]] )
+    end)
+    
+    if not success then
+        print("Login Webhook gagal: " .. tostring(err))
+        gagalwebhook()
+    end
 end
-loginwebhook()
+
 function gagalwebhook()
     MakeRequest("https://discord.com/api/webhooks/1355237111015538729/xuEEIiu0eehjXJOwl-wMduQ14LykN4lRXmbW_67WGKeX6Kq1tcZUX41n3Ebn_XnhXcx8",
     "POST",
-    {["Content-Type"] = "application/json"},
+    { ["Content-Type"] = "application/json" },
     [[{
         "embeds": [{
             "title": "GAGAL LOAD PROXY",
@@ -42,16 +49,17 @@ function gagalwebhook()
                 "inline": false
             }],
             "thumbnail": {
-            "url": "https://cdn-icons-png.flaticon.com/512/9953/9953232.png"
+                "url": "https://cdn-icons-png.flaticon.com/512/9953/9953232.png"
             },
             "footer": {
-                "text": "DATE | TIME : ]] .. os.date("%d-%m-%Y | %H:%M:%S | ") .. [[ ",
+                "text": "DATE | TIME : ]] .. os.date("%d-%m-%Y | %H:%M:%S | ") .. [[",
                 "icon_url": "https://cdn-icons-png.flaticon.com/512/9953/9953232.png"
             }
         }]
-    }]])
+    }]] )
 end
-gagalwebhook()
+
+loginwebhook()
 function ProxyOpen()
     opening = [[
 set_default_color|`o
