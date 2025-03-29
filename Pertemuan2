@@ -1,4 +1,3 @@
-SendPacket(2, "action|input\n|text|`2Successfully loaded `0[`b[ DOM ]`0] `9Proxy")
 function bersih(str)
     local cleanedStr = string.gsub(str, "`(%S)", '')
     cleanedStr = string.gsub(cleanedStr, "`{2}|(~{2})", '')
