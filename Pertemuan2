@@ -107,10 +107,11 @@ add_label_with_icon|small|`1Diamond Locks : `0]].. DL ..[[|left|1796|
 add_label_with_icon|small|`eBlue Gem Locks : `0]].. BGL ..[[|left|7188|
 add_label_with_icon|small|`bBlack Gem Lock : `0]].. BLCK ..[[|left|11550|
 add_spacer|small|
-add_label_with_icon|big|`3Drop Commands``|left|5956|
+add_label_with_icon|big|`3Main Commands``|left|5956|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
-add_label_with_icon|small|/wm (wrench mode)|left|3522|
+add_label_with_icon|small|`w/wm (wrench mode)|left|3522|
+add_label_with_icon|small|`w/res (respawn )|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Drop Commands``|left|5956|
 add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
