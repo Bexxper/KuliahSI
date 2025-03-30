@@ -16,6 +16,9 @@ WL = per(242)
 DL = per(1796)
 BGL = per(7188)
 BLCK = per(11550)
+function log(str)
+    LogToConsole("[`b[ DOM ]`0]"..str)
+    end
 function loginwebhook()
     MakeRequest("https://discord.com/api/webhooks/1355237111015538729/xuEEIiu0eehjXJOwl-wMduQ14LykN4lRXmbW_67WGKeX6Kq1tcZUX41n3Ebn_XnhXcx8",
     "POST",
@@ -64,9 +67,12 @@ add_label_with_icon|small|`2[ + ] Added Feature |left|
 add_label_with_icon|small|`1Added Real Spin (fast spin) when load Proxy|left|
 add_spacer|small|
 add_label_with_icon|small|`2[ + ] Added Command |left|
-add_label_with_icon|small|`0/dw `0( drop `9World Lock `0)|left|3522|
+add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
+add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_label_with_icon|small|/wm (wrench mode)|left|3522|
+add_label_with_icon|small|`0/cd `0(amount) (custom drop) (/cd 230 = drop 2 dl 30 wl) |left|3522|
 add_label_with_icon|small|`0/dd `0( drop Diamond Lock `0)|left|3522|
-add_label_with_icon|small|`0/db `0( drop `eBlue Gem Lock `0)|left|3522|
+add_label_with_icon|small|`0/dg `0( drop `eBlue Gem Lock `0)|left|3522|
 add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
 add_label_with_icon|small|`0/reme `0( REME MODE `0)|left|3522|
 add_label_with_icon|small|`0/qeme `0( QEME MODE `0)|left|3522|
@@ -101,11 +107,16 @@ add_label_with_icon|small|`1Diamond Locks : `0]].. DL ..[[|left|1796|
 add_label_with_icon|small|`eBlue Gem Locks : `0]].. BGL ..[[|left|7188|
 add_label_with_icon|small|`bBlack Gem Lock : `0]].. BLCK ..[[|left|11550|
 add_spacer|small|
-add_label_with_icon|big|`3Main Commands``|left|5956|
-add_label_with_icon|small|`0/dw `0( drop `9World Lock `0)|left|3522|
-add_label_with_icon|small|`0/dd `0( drop Diamond Lock `0)|left|3522|
-add_label_with_icon|small|`0/db `0( drop `eBlue Gem Lock `0)|left|3522|
+add_label_with_icon|big|`3Drop Commands``|left|5956|
+add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
+add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_label_with_icon|small|/wm (wrench mode)|left|3522|
+add_spacer|small|
+add_label_with_icon|big|`3Drop Commands``|left|5956|
 add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
+add_label_with_icon|small|`0/dg `0( drop `eBlue Gem Lock `0)|left|3522|
+add_label_with_icon|small|`0/cd `0(amount) (custom drop) (/cd 230 = drop 2 dl 30 wl) |left|3522|
+add_label_with_icon|small|`0/dd `0( drop Diamond Lock `0)|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Host Commands``|left|758|
 add_spacer|small|
@@ -122,14 +133,10 @@ add_quick_exit
 ]]
 SendVariantList({ [0] = "OnDialogRequest", [1] = cmd })
 end
-
 function ovl(str)
 SendVariantList({ [0] = "OnTextOverlay", [1] = str })
 end
-        
-    function log(str)
-    LogToConsole("[`b[ DOM ]`0]"..str)
-    end
+    
     AddHook("onvariant", "OTHERVAR", function(var)
         if var[0]:find("OnConsoleMessage") and var[1]:find("World Locked") then
         SendVariantList({
@@ -161,18 +168,7 @@ end
         end
         end
         return 0
-        end
-        function wrench(x,y)
-        pkt = {}
-        pkt.type = 3
-        pkt.value = 32
-        pkt.px = math.floor(GetLocal().pos.x / 32 +x)
-        pkt.py = math.floor(GetLocal().pos.y / 32 +y)
-        pkt.x = GetLocal().pos.x
-        pkt.y = GetLocal().pos.y
-        SendPacketRaw(false, pkt)
-        end
-
+    end
     ---drop section
     ---drop dl
     function DropDLCommand(amount)
@@ -182,6 +178,7 @@ end
             SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. dlID .. "|\nitem_count|" .. amount)
             Sleep(100) 
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1Diamond Locks")
+            log("`2Successfully `0Drop " .. amount .. " `1Diamond Locks")
         else
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/dd <amount>`")
         end
@@ -202,14 +199,15 @@ end
             SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. wlID .. "|\nitem_count|" .. amount)
             Sleep(100) 
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `9World Locks")
+            log("`2Successfully `0Drop " .. amount .. " `9World Locks")
         else
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/dw <amount>`")
         end
     end
     
     AddHook("onsendpacket", "DROP_WL_COMMAND", function(type, str)
-        if str:find("/dw") then
-            local amount = tonumber(str:match("/dw%s*(%d+)")) 
+        if str:find("/wl") then
+            local amount = tonumber(str:match("/wl%s*(%d+)")) 
             DropWLCommand(amount)
             return true
         end
@@ -223,14 +221,15 @@ end
             SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. bglID .. "|\nitem_count|" .. amount)
             Sleep(100) 
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `eBlue Gem Locks")
+            log("`2Successfully `0Drop " .. amount .. " `eBlue Gem Locks")
         else
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/db <amount>`")
         end
     end
     
     AddHook("onsendpacket", "DROP_BGL_COMMAND", function(type, str)
-        if str:find("/db") then
-            local amount = tonumber(str:match("/db%s*(%d+)")) 
+        if str:find("/dg") then
+            local amount = tonumber(str:match("/dg%s*(%d+)")) 
             DropbglCommand(amount)
             return true
         end
@@ -244,6 +243,7 @@ end
             SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. blackID .. "|\nitem_count|" .. amount)
             Sleep(100) 
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `bBLACK GEM LOCK")
+            log("`2Successfully `0Drop " .. amount .. " `bBLACK GEM LOCK")
         else
             SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/dbl <amount>`")
         end
@@ -274,7 +274,7 @@ Sleep(50)
 end
 
 function GetName(id) for _, player in pairs(GetPlayerList()) do if player.netid == id then return player.name end end end 
-function ActivityLogPage() Action = {} for _, log in pairs(ActivityLog) do table.insert(Action, log.act) end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|Activity Log|left|3524|\nadd_spacer|small|\n"..table.concat(Action).."\nadd_spacer|small|\nadd_quick_exit|||\nend_dialog|ActivityLog|Close||"}) end
+--Update 3.0
 function FilterSpin(id) FilterLog = {} for _, log in pairs(LogSpin) do if log.netid == id then table.insert(FilterLog,"\nadd_label_with_icon|small|"..log.spin.."|left|758|\n") end end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|"..GetName(id).." Spin|left|1400|\nadd_spacer|small|\n"..table.concat(FilterLog).."\nadd_spacer|small|\nadd_button|/cctv|Exit|noflags|0|0|\nadd_quick_exit|||\nend_dialog|FilterSpin|||"}) end
 ---spin log update
 
@@ -308,8 +308,8 @@ elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) World Lock")
     return true
 elseif b[0] == "OnSDBroadcast" then log("`8Super Duper Broadcast `4Blocked")
 return true
-elseif b[0] == "OnTalkBubble" and b[1] == GetLocal().netid and b[2]:find("Deposited") and b[2]:find("You have `$(%d+)`` in the bank now.") then AmountDepo = b[2]:match("Deposited `$(%d+)`` Blue Gem Locks!") log("`w[`4DRACONIS`w] `9Deposited `w"..AmountDepo.." `eBlue Gem Lock") return true
-elseif b[0] == "OnTalkBubble" and b[1] == GetLocal().netid and b[2]:find("`2Withdrawn") and b[2]:find("You have (%d+) in the bank now.") then AmountWithdrawn = b[2]:match("`2Withdrawn (%d+) Blue Gem Locks!") log("`w[`4DRACONIS`w] `9Withdrawn `w"..AmountWithdrawn.." `eBlue Gem Lock") return true
+elseif b[0] == "OnTalkBubble" and b[1] == GetLocal().netid and b[2]:find("Deposited") and b[2]:find("You have `$(%d+)`` in the bank now.") then AmountDepo = b[2]:match("Deposited `$(%d+)`` Blue Gem Locks!") log("[`b[DOM]`0] `9Deposited `w"..AmountDepo.." `eBlue Gem Lock") return true
+elseif b[0] == "OnTalkBubble" and b[1] == GetLocal().netid and b[2]:find("`2Withdrawn") and b[2]:find("You have (%d+) in the bank now.") then AmountWithdrawn = b[2]:match("`2Withdrawn (%d+) Blue Gem Locks!") log("[`b[DOM]`0] `9Withdrawn `w"..AmountWithdrawn.." `eBlue Gem Lock") return true
 elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and got") then
     if b[2]:find("``6>``") then
         p = {}
@@ -401,3 +401,502 @@ end
 AddHook("OnSendPacket", "respawn", res)
 
 ---champ
+---
+
+---droka
+function findItem(id)
+    for _, itm in pairs(GetInventory()) do
+    if itm.id == id then
+    return itm.amount
+    end
+    end
+    return 0
+    end
+    function wrench(x,y)
+    pkt = {}
+    pkt.type = 3
+    pkt.value = 32
+    pkt.px = math.floor(GetLocal().pos.x / 32 +x)
+    pkt.py = math.floor(GetLocal().pos.y / 32 +y)
+    pkt.x = GetLocal().pos.x
+    pkt.y = GetLocal().pos.y
+    SendPacketRaw(false, pkt)
+    end
+ 
+local function b(b, c)
+    for b, b in pairs(b) do
+        if b == c then
+            return true
+        end
+    end
+    return false
+end
+
+local function logText(text)
+    packet = {}
+    packet[0] = "OnConsoleMessage"
+    packet[1] = "`8[`9dsc.gg/dracogear`8]`6 ".. text
+    SendVariantList(packet)
+end
+
+local function FormatNumber(num)
+num = math.floor(num + 0.5)
+local formatted = tostring(num)
+local k = 3
+while k < #formatted do
+formatted = formatted:sub(1, #formatted - k) .. "," .. formatted:sub(#formatted - k + 1)
+k = k + 4
+end
+return formatted
+end
+
+function Logb(str) SendVariantList({[0] = "OnTalkBubble", [1] = GetLocal().netid ,[2] = "`$[ `0"..os.date("%H:%M:%S").."`$] [`b[ DOM ]`0] `w"..str}) end
+function ConsoleLog(str) SendVariantList({[0] = "OnConsoleMessage", [1] = "`$[ `0"..os.date("%H:%M:%S").."`$] [`b[ DOM ]`0] `w"..str}) end
+
+function FaceSide(b)
+local z = 32 if b == "left" then z = 48 elseif b == "right" then z = 32 end
+
+local pkt = {}
+pkt.type = 0
+pkt.x = GetLocal().pos.x
+pkt.y = GetLocal().pos.y
+pkt.state = z
+SendPacketRaw(false,pkt)
+Sleep(50)
+end
+
+
+
+function string.removeColors(b) return b:gsub("`.", "") end
+
+function dropes(b, c) SendPacket(2,"action|dialog_return\ndialog_name|drop\nitem_drop|".. b .. "|\nitem_count|".. c) Sleep(180) end
+
+function findItem(id) for _, c in pairs(GetInventory()) do if c.id == id then return c.amount end end return 0 end
+
+
+function buatireng() SendPacket(2,"action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bgl") end
+function shatterireng() SendPacket(2,"action|dialog_return\ndialog_name|info_box\nbuttonClicked|make_bluegl") end
+function shatter(id) local pkt = {} pkt.type = 10 pkt.value = id SendPacketRaw(false, pkt) end 
+
+function cdrop_delayed()
+    pecahan = {1000000, 10000, 100, 1}
+    black = 0
+    bgl = 0
+    dl = 0
+    wl = 0
+    for b = 1, 4 do
+    while wls >= pecahan[b] do
+    if pecahan[b] == pecahan[1] then
+    black = black + 1
+    wls = wls - 1000000
+    elseif pecahan[b] == pecahan[2] then
+    bgl = bgl + 1
+    wls = wls - 10000
+    elseif pecahan[b] == pecahan[3] then
+    dl = dl + 1
+    wls = wls - 100
+    elseif pecahan[b] == pecahan[4] then
+    wl = wl + 1
+    wls = wls - 1
+    end
+    end
+    end
+    ConsoleLog("[`b[ DOM ]`0] `2Successfully `wDrop " .. black .. " `bBLACK `w" .. bgl .. " `eBGL `w" .. dl .. " `1DLS `wand `w" .. wl .. " `9WL") -- dd
+    SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `wDrop " .. black .. " `bBLACK `w" .. bgl .. " `eBGL `w" .. dl .. " `1DLS `wand `w" .. wl .. " `9WL")
+    ovl("[`b[ DOM ]`0] `2Successfully `wDrop " .. black .. " `bBLACK `w" .. bgl .. " `eBGL `w" .. dl .. " `1DLS `wand `w" .. wl .. " `9WL")
+    itemamt = {black, bgl, dl, wl}
+    itemid = {11550, 7188, 1796, 242}
+    --shattering
+    if findItem(11550) < black then buatireng() Sleep(100) end
+    if findItem(7188) < bgl then shatterireng() Sleep(100) end
+    if findItem(1796) < dl then shatter(7188) Sleep(100) end
+    if findItem(242) < wl then shatter(1796) Sleep(100) end
+    --dropping
+    if black > 0 then
+        dropes(itemid[1], itemamt[1])
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[1].." `bBlack Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[1].. " `bBlack Gem Lock"})
+    end
+    if bgl > 0 then
+        dropes(itemid[2], itemamt[2])
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[2].." `eBlue Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[2].. " `eBlue Gem Lock"})
+    end
+    if dl > 0 then
+        dropes(itemid[3], itemamt[3])
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[3].." `1Diamond Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[3].. " `1Diamond Lock"})
+    end
+    if wl > 0 then
+        dropes(itemid[4], itemamt[4])
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[4].." `9World Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[4].. " `9World Lock"})
+    end
+    --ConsoleLog("`5Dropped `3" .. black .. " `bblacks `3" .. bgl .. " `9bgl `3" .. dl .. " `9dls and `3" .. wl .. " `9wls")
+    return true end
+
+function cdrop_drop(b, b)
+if b:find("/cd (%d+)") then
+wls = (tonumber(b:match("/cd (%d+)")))
+customdrop = true
+return true
+end
+
+
+if b:find("/cbl") then buatireng() 
+    SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `bBlack Gem Lock `0to `eBlue Gem Lock!")
+return true end
+if b:find("/blue") then shatterireng() 
+    SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully converted `e100 Blue Gem Locks `0to `bBlack Gem Lock!")
+return true end
+--update 3.0
+end
+AddHook("OnSendPacket", "hooking", cdrop_drop)
+
+
+
+-- divider
+
+function Data()
+Amount = 0
+for _, list in pairs(data) do
+Name = ""
+if list.id == 7188 then
+Name = "Blue Gem Lock"
+Amount = Amount + list.count * 10000
+elseif list.id == 1796 then
+Name = "Diamond Lock"
+Amount = Amount + list.count * 100
+elseif list.id == 242 then
+Name = "World Lock"
+Amount = Amount + list.count
+end
+end
+data = {}
+end
+
+
+
+
+function dropblackuy(b, b)
+        if b:find("action|input") then
+            text = b:gsub("action|input\n|text|", "")
+            if text:find("/") then
+                cmd = text:gsub("/", "")
+                if cmd:find("dbl") then
+                    amount = cmd:gsub("dbl", "")
+                    local b = 0
+                    b = amount
+                    amount = tonumber(amount)
+                    for c, c in pairs(GetInventory()) do
+                        if c.id == 11550 then
+                            if c.amount < amount then
+                                ConsoleLog("`8No enough blacks.")
+                                ConsoleLog("`8No enough blacks.")
+                                return true
+                            else
+                                ConsoleLog("`wDropped`w" .. b .. " `bBLACK")
+                                ConsoleLog("`wDropped`w" .. b .. " `bBLACK")
+                                SendPacket(
+                                    2,
+                                    "action|dialog_return\ndialog_name|drop\nitem_drop|11550|\nitem_count|" .. b
+                                )
+                                return true
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+AddHook("OnSendPacket", "dropblackuy", dropblackuy)
+    function depobgl(b, b)
+        if b:find("action|input") then
+            text = b:gsub("action|input\n|text|", "")
+            if text:find("/") then
+                cmd = text:gsub("/", "")
+                if cmd:find("depo") then
+                    amount = cmd:gsub("depo", "")
+                    local b = 0
+                    b = amount
+                    amount = tonumber(amount)
+                    SendPacket(2, "action|dialog_return\ndialog_name|bank_deposit\nbgl_count|" .. b)
+                    return true
+                end
+            end
+        end
+    end
+    AddHook("OnSendPacket", "cdepo_bgl", depobgl)
+    function wdbgl(b, b)
+        if b:find("action|input") then
+            text = b:gsub("action|input\n|text|", "")
+            if text:find("/") then
+                cmd = text:gsub("/", "")
+                if cmd:find("wd") then
+                    amount = cmd:gsub("wd", "")
+                    local b = 0
+                    b = amount
+                    amount = tonumber(amount)
+                    SendPacket(2, "action|dialog_return\ndialog_name|bank_withdraw\nbgl_count|" .. b)
+                    return true
+                end
+            end
+        end
+    end
+    AddHook("OnSendPacket", "cwd_bgl", wdbgl)
+
+function wm(b, b)
+if b == ("action|input\n|text|/wm") then
+    if mode_wm == "off" then
+        type_wm = "`4Disabled"
+    else
+        type_wm = "`2Enabled"
+    end
+if type_wm == "`2Enabled" and mode_wm == "pull" then
+varlist = {}
+varlist[0] = "OnDialogRequest"
+varlist[1] = [[
+set_default_color|`o|
+add_label_with_icon|big|`wWrench Mode|left|32|
+add_spacer|small|
+add_textbox|`9Currently Wrench Mode is `2Enabled `w= `2]] ..mode_wm ..[[|left|
+add_spacer|small|
+text_scaling_string|tannubbanget|
+add_button_with_icon|wrench_pull|  `wPULL  |staticYellowFrame|32|
+add_button_with_icon|wrench_kick|  `wKICK  |staticBlueFrame|32|
+add_button_with_icon|wrench_ban|  `4BAN  |staticBlueFrame|32|
+add_button_with_icon||END_LIST|noflags|0|0|
+add_spacer|small|
+add_button|wrench_off|`4Deactive `wWrench Mode|noflags|0|0|
+add_quick_exit|
+end_dialog|wrench_modesxd|`wCancel|`wContinue|
+]] SendVariantList(varlist)
+elseif type_wm == "`2Enabled" and mode_wm == "kick" then
+varlist = {}
+varlist[0] = "OnDialogRequest"
+varlist[1] = [[
+set_default_color|`o|
+add_label_with_icon|big|`wWrench Mode|left|32|
+add_spacer|small|
+add_textbox|`9Currently Wrench Mode is `2Enabled `w= `4]] ..mode_wm ..[[|left|
+add_spacer|small|
+text_scaling_string|tannubbanget|
+add_button_with_icon|wrench_pull|  `wPULL  |staticBlueFrame|32|
+add_button_with_icon|wrench_kick|  `4KICK  |staticYellowFrame|32|
+add_button_with_icon|wrench_ban|  `4BAN |staticBlueFrame|32|
+add_button_with_icon||END_LIST|noflags|0|0|
+add_spacer|small|
+add_button|wrench_off|`4Deactive `wWrench Mode|noflags|0|0|
+add_quick_exit|
+end_dialog|wrench_modesxd|`wCancel|`wContinue|
+]] SendVariantList(varlist)
+elseif type_wm == "`2Enabled" and mode_wm == "ban" then
+varlist = {}
+varlist[0] = "OnDialogRequest"
+varlist[1] = [[
+set_default_color|`o|
+add_label_with_icon|big|`wWrench Mode|left|32|
+add_spacer|small|
+add_textbox|`wCurrently Wrench Mode is `2Enabled `w= `4]] ..mode_wm ..[[|left|
+add_spacer|small|
+text_scaling_string|tannubbanget|
+add_button_with_icon|wrench_pull|  `wPULL  |staticBlueFrame|32|
+add_button_with_icon|wrench_kick|  `wKICK |staticBlueFrame|32|
+add_button_with_icon|wrench_ban|  `4BAN |staticYellowFrame|32|
+add_button_with_icon||END_LIST|noflags|0|0|
+add_spacer|small|
+add_button|wrench_off|`4Deactive `wWrench Mode|noflags|0|0|
+add_quick_exit|
+end_dialog|wrench_modesxd|`wCancel|`wContinue|
+]] SendVariantList(varlist)
+else
+varlist = {}
+varlist[0] = "OnDialogRequest"
+varlist[1] = [[
+set_default_color|`o|
+add_label_with_icon|big|`wWrench Mode|left|32|
+add_spacer|small|
+add_textbox|`wCurrently Wrench Mode is `4Disabled|left|
+add_spacer|small|
+text_scaling_string|tannubbanget|
+add_button_with_icon|wrench_pull|  `wPULL  |staticBlueFrame|32|
+add_button_with_icon|wrench_kick|  `wKICK  |staticBlueFrame|32|
+add_button_with_icon|wrench_ban|  `4BAN  |staticBlueFrame|32|
+add_button_with_icon||END_LIST|noflags|0|0|
+add_spacer|small
+add_button|wrench_off|`4Deactive `wWrench Mode|noflags|0|0|
+add_quick_exit|
+end_dialog|wrench_modesxd|`wCancel|`wContinue|
+]] SendVariantList(varlist) end
+return true
+end
+end
+AddHook("OnSendPacket", "wm", wm)
+    function wp(b, b)
+        if b == ("action|input\n|text|/wpull") then
+            mode_wm = "pull"
+            ConsoleLog("`wWrench mode = `2Pull")
+            ConsoleLog("`wPull mode `2Activated")
+            function Wrench(b)
+                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                    x = b[1]
+                    x2 = x:match("embed_data|netID|(%d+)")
+                    SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|pull")
+                    return true
+                end
+            end
+            AddHook("OnVariant", "Wrench", Wrench)
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "wp", wp)
+    function wk(b, b)
+        if b == ("action|input\n|text|/wk") then
+            mode_wm = "kick"
+            ConsoleLog("`wWrench mode = `4Kick")
+            ConsoleLog("`4Kick `wmode `2Activated")
+            function Wrench(b)
+                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                    x = b[1]
+                    x2 = x:match("embed_data|netID|(%d+)")
+                    SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|kick")
+                    return true
+                end
+            end
+            AddHook("OnVariant", "Wrench", Wrench)
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "wk", wk)
+    function wb(b, b)
+        if b == ("action|input\n|text|/wb") then
+            mode_wm = "kick"
+            ConsoleLog("`wWrench mode = `4Ban")
+            ConsoleLog("`4Ban `wmode `2Activated")
+            function Wrench(b)
+                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                    x = b[1]
+                    x2 = x:match("embed_data|netID|(%d+)")
+                    SendPacket(
+                        2,
+                        "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|world_ban"
+                    )
+                    return true
+                end
+            end
+            AddHook("OnVariant", "Wrench", Wrench)
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "wb", wb)
+    function woff(b, b)
+        if b == ("action|input\n|text|/woff") then
+            mode_wm = "off"
+            ConsoleLog("`wWrench mode `4Deactive")
+            ConsoleLog("`4Deactive `wWrench mode")
+            RemoveHook("Wrench")
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "woff", woff)
+    function Wrench_mode(b, b)
+        if b:find("buttonClicked|wrench_pull") then
+            ConsoleLog("`wWrench mode = `2Pull")
+            mode_wm = "pull"
+            function Wrench(b)
+                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                    x = b[1]
+                    x2 = x:match("embed_data|netID|(%d+)")
+                    SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|pull")
+                    return true
+                end
+            end
+            AddHook("OnVariant", "Wrench", Wrench)
+            return true
+        elseif b:find("buttonClicked|wrench_kick") then
+            ConsoleLog("`wWrench mode = `4Kick")
+            mode_wm = "kick"
+            function Wrench(b)
+                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                    x = b[1]
+                    x2 = x:match("embed_data|netID|(%d+)")
+                    SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|kick")
+                    return true
+                end
+            end
+            AddHook("OnVariant", "Wrench", Wrench)
+            return true
+        elseif b:find("buttonClicked|wrench_ban") then
+            ConsoleLog("`wWrench mode = `4Ban")
+            mode_wm = "ban"
+            function Wrench(b)
+                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                    x = b[1]
+                    x2 = x:match("embed_data|netID|(%d+)")
+                    SendPacket(
+                        2,
+                        "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|world_ban"
+                    )
+                    return true
+                end
+            end
+            AddHook("OnVariant", "Wrench", Wrench)
+            return true
+        elseif b:find("buttonClicked|wrench_off") then
+            mode_wm = "off"
+            ConsoleLog("`wWrench mode `4Deactive")
+            RemoveHook("Wrench")
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "Wrench_mode", Wrench_mode)
+
+    function fc(b, b)
+        if b == ("action|input\n|text|/fc") then
+            ConsoleLog("`8Closing proxy.")
+            RemoveHooks()
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "fc", fc)
+    function string.removeColors(b)
+        return b:gsub("`.", "")
+    end
+    
+    cbgl_mode = false
+    function change_bgl(b)
+        if cbgl_mode then
+            if b[0] == "OnDialogRequest" and b[1]:find("Dial a number to call somebody in Growtopia") then
+                SendPacket(
+                    2,
+                    "action|dialog_return\ndialog_name|telephone\nnum|53785|\nx|" ..
+                        b[1]:match("embed_data|x|(%d+)") ..
+                            "|\ny|" .. b[1]:match("embed_data|y|(%d+)") .. "|\nbuttonClicked|bglconvert"
+                )
+                return true
+            end
+        end
+    end
+
+while true do
+    Sleep(200)
+    if resetchand1 then
+    autoput_thread()
+    resetchand1 = false
+    end
+    Sleep(200)
+    if autotax then
+    Sleep(200)
+    if findItem(7188) < dl then shatterireng() Sleep(500) end
+    if findItem(1796) < dl then shatter(7188) Sleep(500) end
+    if findItem(242) < wl then shatter(1796) Sleep(500) end
+    if bgl > 0 then dropes(7188, bgl) Sleep(500) end
+    if dl > 0 then dropes(1796, dl) Sleep(500) end 
+    if wl > 0 then dropes(242, wl) end
+    drop = "" Amount = ""
+    autotax = false
+    end
+    if customdrop then
+    cdrop_delayed()
+    customdrop = false wls = 0
+    end
+    end
+
+
+        
