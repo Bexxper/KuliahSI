@@ -65,6 +65,7 @@ add_spacer|small|
 add_label_with_icon|medium|`0Log Update``|left|3524|
 add_label_with_icon|small|`2[ + ] Added Feature |left|
 add_label_with_icon|small|`1Added Real Spin (fast spin) when load Proxy|left|
+add_label_with_icon|small|`1Added Dialog Block for /cdl and /champ|left|
 add_spacer|small|
 add_label_with_icon|small|`2[ + ] Added Command |left|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
@@ -74,8 +75,8 @@ add_label_with_icon|small|`0/cd `0(amount) (custom drop) (/cd 230 = drop 2 dl 30
 add_label_with_icon|small|`0/dd `0( drop Diamond Lock `0)|left|3522|
 add_label_with_icon|small|`0/dg `0( drop `eBlue Gem Lock `0)|left|3522|
 add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
-add_label_with_icon|small|`0/reme `0( REME MODE `0)|left|3522|
-add_label_with_icon|small|`0/qeme `0( QEME MODE `0)|left|3522|
+add_label_with_icon|small|`0/cdl `0( Change 100 Dls to BGL. (wrench Telephone) `0)|left|3522|
+add_label_with_icon|small|`0/champ `0( Auto buy Champ (Wrench Telephone) `0)|left|3522|
 add_spacer|small|
 add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
 add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
@@ -107,11 +108,10 @@ add_label_with_icon|small|`1Diamond Locks : `0]].. DL ..[[|left|1796|
 add_label_with_icon|small|`eBlue Gem Locks : `0]].. BGL ..[[|left|7188|
 add_label_with_icon|small|`bBlack Gem Lock : `0]].. BLCK ..[[|left|11550|
 add_spacer|small|
-add_label_with_icon|big|`3Main Commands``|left|5956|
+add_label_with_icon|big|`3Drop Commands``|left|5956|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
-add_label_with_icon|small|`w/wm (wrench mode)|left|3522|
-add_label_with_icon|small|`w/res (respawn )|left|3522|
+add_label_with_icon|small|/wm (wrench mode)|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Drop Commands``|left|5956|
 add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
@@ -402,7 +402,45 @@ end
 AddHook("OnSendPacket", "respawn", res)
 
 ---champ
----
+chem_mode = false
+function champ_bang(b)
+    if chem_mode then
+        if b[0] == "OnDialogRequest" and b[1]:find("Dial a number to call somebody in Growtopia") then
+            SendPacket(
+                2,
+                "action|dialog_return\ndialog_name|telephone\nnum|53785|\nx|" ..
+                    b[1]:match("embed_data|x|(%d+)") ..
+                        "|\ny|" .. b[1]:match("embed_data|y|(%d+)") .. "|\nbuttonClicked|getchamp"
+            )
+            log("`2Successfully `wbuy 1 Champagne!")
+            return true
+        end
+    end
+end
+AddHook("OnVariant", "champ_bang", champ_bang)
+function chmp_hook_xd(b, b)
+    if b == ("action|input\n|text|/champ") then
+        if chem_mode == true then
+            chem_mode = false
+            ConsoleLog("[`b[ DOM ]`0] `4Auto Buy Champagne `0Deactivated!")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `4Auto Buy Champagne `0Deactivated!")
+            RemoveHook("champ_bang")
+        elseif chem_mode == false then
+            chem_mode = true
+            ConsoleLog("[`b[ DOM ]`0] `2Auto Buy Champagne `0Activated!")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Auto Buy Champagne `0Activated!")
+            AddHook("OnVariant", "champ_bang", champ_bang)
+        end
+        return true
+    end
+end
+AddHook("OnSendPacket", "chmp_hook_xd", chmp_hook_xd)
+function chemp_bang(b)
+    if b[0] == "OnDialogRequest" and b[1]:find("add_label_with_icon|big|`wChampagne````|left|15816|") then
+        return true
+    end
+end
+AddHook("OnVariant", "chemp_bang", chemp_bang)
 
 ---droka
 function findItem(id)
@@ -870,10 +908,36 @@ AddHook("OnSendPacket", "wm", wm)
                         b[1]:match("embed_data|x|(%d+)") ..
                             "|\ny|" .. b[1]:match("embed_data|y|(%d+)") .. "|\nbuttonClicked|bglconvert"
                 )
+                log("`2Successfully `wConvert 100 `1Diamond Locks `wfor 1 `eBGL`w!")
                 return true
             end
         end
     end
+    AddHook("OnVariant", "change_bgl", change_bgl)
+    function cbgl_hook_xd(b, b)
+        if b == ("action|input\n|text|/cdl") then
+            if cbgl_mode == true then
+                cbgl_mode = false
+                ConsoleLog("[`b[ DOM ]`0] `4Converter `0Deactivated!")
+                SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `4Converter `0Deactivated!")
+                RemoveHook("change_bgl")
+            elseif cbgl_mode == false then
+                cbgl_mode = true
+                ConsoleLog("[`b[ DOM ]`0] `2Converter `0Activated!")
+                SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Converter `0Activated!")
+                AddHook("OnVariant", "change_bgl", change_bgl)
+            end
+            return true
+        end
+    end
+    AddHook("OnSendPacket", "cbgl_hook_xd", cbgl_hook_xd)
+    function chnage_bgl2(b)
+        if b[0] == "OnDialogRequest" and b[1]:find("add_label_with_icon|big|`wBlue Gem Lock````|left|7188|") then
+            return true
+        end
+    end
+    AddHook("OnVariant", "chnage_bgl2", chnage_bgl2)
+
 
 while true do
     Sleep(200)
