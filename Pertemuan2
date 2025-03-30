@@ -423,12 +423,12 @@ function chmp_hook_xd(b, b)
         if chem_mode == true then
             chem_mode = false
             ConsoleLog("[`b[ DOM ]`0] `4Auto Buy Champagne `0Deactivated!")
-            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `4Auto Buy Champagne `0Deactivated!")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `9Auto Buy Champagne `4Deactivated!")
             RemoveHook("champ_bang")
         elseif chem_mode == false then
             chem_mode = true
             ConsoleLog("[`b[ DOM ]`0] `2Auto Buy Champagne `0Activated!")
-            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Auto Buy Champagne `0Activated!")
+            SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `9Auto Buy Champagne `2Activated!")
             AddHook("OnVariant", "champ_bang", champ_bang)
         end
         return true
@@ -919,12 +919,12 @@ AddHook("OnSendPacket", "wm", wm)
             if cbgl_mode == true then
                 cbgl_mode = false
                 ConsoleLog("[`b[ DOM ]`0] `4Converter `0Deactivated!")
-                SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `4Converter `0Deactivated!")
+                SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `9Converter `4Deactivated!")
                 RemoveHook("change_bgl")
             elseif cbgl_mode == false then
                 cbgl_mode = true
                 ConsoleLog("[`b[ DOM ]`0] `2Converter `0Activated!")
-                SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `2Converter `0Activated!")
+                SendPacket(2,"action|input\n|text|[`b[ DOM ]`0] `9Converter `2Activated!")
                 AddHook("OnVariant", "change_bgl", change_bgl)
             end
             return true
