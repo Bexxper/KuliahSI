@@ -52,6 +52,7 @@ add_label_with_icon|small|Proxy Version : `0V1.0``|left|10794|
 add_label_with_icon|small|Application : `1BotHax `0/ `4B'INTERNAL``|left|10794|
 add_label_with_icon|small|Device : PC / Windows``|left|10794|
 add_label_with_icon|small|`3Collaborate with Aawastore``|left|10794|
+add_label_with_icon|small|`1Discord `0: Bexxper``|left|10794|
 add_label_with_icon|small|`0/proxy `1To see All Feature``|left|10794|
 add_spacer|small|
 add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
@@ -64,19 +65,12 @@ add_label_with_icon|small|`bBlack Gem Lock : `0]].. BLCK ..[[|left|11550|
 add_spacer|small|
 add_label_with_icon|medium|`0Log Update``|left|3524|
 add_label_with_icon|small|`2[ + ] Added Feature |left|
-add_label_with_icon|small|`1Added Real Spin (fast spin) when load Proxy|left|
-add_label_with_icon|small|`1Added Dialog Block for /cdl and /champ|left|
+add_label_with_icon|small|`0Adjust /db (count) [ /db 150 = drop 1 Black 50 bgl ] |left|
+add_label_with_icon|small|`0Adjust /dd (count) [ /dd 150 = drop 1 BGL 50 DL ] |left|
+add_label_with_icon|small|`0Added [X3] on /reme when player got 19,28,0 |left|
 add_spacer|small|
 add_label_with_icon|small|`2[ + ] Added Command |left|
-add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
-add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
-add_label_with_icon|small|/wm (wrench mode)|left|3522|
-add_label_with_icon|small|`0/cd `0(amount) (custom drop) (/cd 230 = drop 2 dl 30 wl) |left|3522|
-add_label_with_icon|small|`0/dd `0( drop Diamond Lock `0)|left|3522|
-add_label_with_icon|small|`0/dg `0( drop `eBlue Gem Lock `0)|left|3522|
-add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
-add_label_with_icon|small|`0/cdl `0( Change 100 Dls to BGL. (wrench Telephone) `0)|left|3522|
-add_label_with_icon|small|`0/champ `0( Auto buy Champ (Wrench Telephone) `0)|left|3522|
+add_label_with_icon|small|`0Added /logspin [ Wheel spin History click roulette to focus on 1 player spin ] |left|3522|
 add_spacer|small|
 add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
 add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
@@ -97,7 +91,7 @@ add_label_with_icon|small|Proxy Version : `0V1.0``|left|10794|
 add_label_with_icon|small|Application : `1BotHax `0/ `4B'INTERNAL``|left|10794|
 add_label_with_icon|small|Device : PC / Windows``|left|10794|
 add_label_with_icon|small|`3Collaborate with Aawastore``|left|10794|
-add_label_with_icon|small|`bTiktok `0: futirrr``|left|10794|
+add_label_with_icon|small|`1Discord `0: Bexxper``|left|10794|
 add_spacer|small|
 add_label_with_icon|small|`4User ID : `3]] .. math.floor(GetLocal().userid) .. " `0x `4Net ID : `3" .. math.floor(GetLocal().netid) .. [[
 |left|2278|
@@ -107,23 +101,26 @@ add_label_with_icon|small|`1Diamond Locks : `0]].. DL ..[[|left|1796|
 add_label_with_icon|small|`eBlue Gem Locks : `0]].. BGL ..[[|left|7188|
 add_label_with_icon|small|`bBlack Gem Lock : `0]].. BLCK ..[[|left|11550|
 add_spacer|small|
-add_label_with_icon|big|`3Drop Commands``|left|5956|
+add_label_with_icon|big|`3General Commands``|left|5956|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
-add_label_with_icon|small|/wm (wrench mode)|left|3522|
+add_label_with_icon|small|`0/wm (wrench mode)|left|3522|
+add_label_with_icon|small|`0/wpull (wrench pull mode)|left|3522|
+add_label_with_icon|small|`0/cdl `0( Change 100 Dls to BGL (wrench Telephone) `0)|left|3522|
+add_label_with_icon|small|`0/champ `0( Auto buy Champ (Wrench Telephone) `0)|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Drop Commands``|left|5956|
 add_label_with_icon|small|`0/dbl `0( drop `bBlack Gem Lock `0)|left|3522|
-add_label_with_icon|small|`0/dg `0( drop `eBlue Gem Lock `0)|left|3522|
-add_label_with_icon|small|`0/cd `0(amount) (custom drop) (/cd 230 = drop 2 dl 30 wl) |left|3522|
+add_label_with_icon|small|`0/db `0( drop `eBlue Gem Lock `0)|left|3522|
+add_label_with_icon|small|`0/cd `0(amount) (custom drop) |left|3522|
 add_label_with_icon|small|`0/dd `0( drop Diamond Lock `0)|left|3522|
 add_spacer|small|
 add_label_with_icon|big|`3Host Commands``|left|758|
 add_spacer|small|
-add_label_with_icon|small|`0/reme `0( REME MODE `0)|left|3522|
-add_label_with_icon|small|`0/qeme `0( QEME MODE `0)|left|3522|
+add_label_with_icon|small|`0/reme `0[ REME MODE `0]|left|3522|
+add_label_with_icon|small|`0/qeme `0[ QEME MODE `0]|left|3522|
+add_label_with_icon|small|`0/logspin [ Wheel Spin History ] |left|3522|
 add_spacer|small|
-add_url_button||`bTiktok creator``|kr|https://tiktok.com/futirrr|
 add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
 add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
 add_url_button||`2Whatsapp Aawastore``|kr|https://wa.me/6287722814744|
@@ -171,69 +168,8 @@ end
     end
     ---drop section
     ---drop dl
-    function DropDLCommand(amount)
-        local dlID = 1796  
-    
-        if amount and amount > 0 then
-            SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. dlID .. "|\nitem_count|" .. amount)
-            Sleep(100) 
-            SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `1Diamond Locks")
-            log("`2Successfully `0Drop " .. amount .. " `1Diamond Locks")
-        else
-            SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/dd <amount>`")
-        end
-    end
-    
-    AddHook("onsendpacket", "DROP_DL_COMMAND", function(type, str)
-        if str:find("/dd") then
-            local amount = tonumber(str:match("/dd%s*(%d+)")) 
-            DropDLCommand(amount)
-            return true
-        end
-    end)
     ---drop wl
-    function DropWLCommand(amount)
-        local wlID = 242  
-    
-        if amount and amount > 0 then
-            SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. wlID .. "|\nitem_count|" .. amount)
-            Sleep(100) 
-            SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `9World Locks")
-            log("`2Successfully `0Drop " .. amount .. " `9World Locks")
-        else
-            SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/dw <amount>`")
-        end
-    end
-    
-    AddHook("onsendpacket", "DROP_WL_COMMAND", function(type, str)
-        if str:find("/wl") then
-            local amount = tonumber(str:match("/wl%s*(%d+)")) 
-            DropWLCommand(amount)
-            return true
-        end
-    end)
     ---drop blue gem lock
-    function DropbglCommand(amount)
-        local bglID = 7188 
-    
-        if amount and amount > 0 then
-           
-            SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. bglID .. "|\nitem_count|" .. amount)
-            Sleep(100) 
-            SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Successfully `0Drop " .. amount .. " `eBlue Gem Locks")
-            log("`2Successfully `0Drop " .. amount .. " `eBlue Gem Locks")
-        else
-            SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `4Invalid amount. Use `/db <amount>`")
-        end
-    end
-    
-    AddHook("onsendpacket", "DROP_BGL_COMMAND", function(type, str)
-        if str:find("/dg") then
-            local amount = tonumber(str:match("/dg%s*(%d+)")) 
-            DropbglCommand(amount)
-            return true
-        end
-    end)
     ---drop black
     function DropblackCommand(amount)
         local blackID = 11550 
@@ -274,9 +210,9 @@ Sleep(50)
 end
 
 function GetName(id) for _, player in pairs(GetPlayerList()) do if player.netid == id then return player.name end end end 
---Update 3.0
-function FilterSpin(id) FilterLog = {} for _, log in pairs(LogSpin) do if log.netid == id then table.insert(FilterLog,"\nadd_label_with_icon|small|"..log.spin.."|left|758|\n") end end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|"..GetName(id).." Spin|left|1400|\nadd_spacer|small|\n"..table.concat(FilterLog).."\nadd_spacer|small|\nadd_button|/cctv|Exit|noflags|0|0|\nadd_quick_exit|||\nend_dialog|FilterSpin|||"}) end
----spin log update
+--DropLog Update 3.0
+function FilterSpin(id) FilterLog = {} for _, log in pairs(LogSpin) do if log.netid == id then table.insert(FilterLog,"\nadd_label_with_icon|small|"..log.spin.."|left|758|\n") end end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|"..GetName(id).." Spin Logs|left|758|\nadd_spacer|small|\n"..table.concat(FilterLog).."\nadd_spacer|small|\nadd_button|/cctv|Exit|noflags|0|0|\nadd_quick_exit|||\nend_dialog|FilterSpin|||"}) end
+function SpinLog() SpunLog = {} for _, spin in pairs(LogSpin) do table.insert(SpunLog, spin.spin) end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|Spin Logs|left|758|\nadd_spacer|small|\nadd_smalltext|Press wheel button to focus player spin Logs|\n"..table.concat(SpunLog).."\nadd_spacer|small|\nadd_quick_exit|||\nend_dialog|WorldSpin|Close||"}) end---spinlog update
 
 AddHook("OnSendPacket","Hook", function(b, b)
 if b:find("/reme") then if HostApa ~= "reme" then HostApa = "reme" log("`4Wheel Spin `9Mode set to : `9REME") ovl("`4Wheel Spin `9Mode set to : `9REME") else HostApa = "" log("`4Wheel Spin `9Mode set to : `0Normal") ovl("`4Wheel Spin `9Mode set to : `0Normal")
@@ -288,7 +224,7 @@ end
 return true
     
 end 
----spin log update
+if b:find("/logspin") then SpinLog() return true end 
 if b:find("dialog_name|WorldSpin\nbuttonClicked|(%d+)") then NetID = tonumber(b:match("dialog_name|WorldSpin\nbuttonClicked|(%d+)")) FilterSpin(NetID) return true end
 end)
 
@@ -315,9 +251,9 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`4FAKE`0] " .. b[2]
+        p[2] = "`0[`b[ DOM ]`0]`0[`4FAKE`0] " .. b[2]
         p[3] = -1
-        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`4FAKE`0] " .. b[2].."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`4FAKE`0] " .. b[2]})
+        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`4FAKE`0] " .. b[2].."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`4FAKE`0] " .. b[2]})
         elseif b[2]:find("``!]``") then
         s2 = b[2]:find("`` spun") - 1
         s1 = b[2]:sub(4, s2)
@@ -363,12 +299,16 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
             elseif tonumber(reme) and reme == 1 then
                 reme = "`4" .. reme
             end
+            local x3_label = ""
+            if tonumber(jml) == 19 or tonumber(jml) == 28 or tonumber(jml) == 0 then
+                x3_label = " [X3]"
+            end            
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w] "
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]" .. x3_label
         p[3] = -1
-        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `b[`5reme: "..reme.."`b]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `b[`5reme: "..reme.."`b]"})
+        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"})
         else
         p = {}
         p[0] = "OnTalkBubble"
@@ -381,9 +321,9 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`4FAKE`0] " .. b[2]
+        p[2] = "`0[`b[ DOM ]`0]`0[`4FAKE`0] " .. b[2]
         p[3] = -1
-        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`4FAKE`0] " .. b[2].."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`4FAKE`0] " .. b[2]})
+        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`4FAKE`0] " .. b[2].."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`4FAKE`0] " .. b[2]})
         end
 return true
 end
@@ -572,6 +512,16 @@ function cdrop_delayed()
 function cdrop_drop(b, b)
 if b:find("/cd (%d+)") then
 wls = (tonumber(b:match("/cd (%d+)")))
+customdrop = true
+return true
+end
+if b:find("/db (%d+)") then
+    wls = (tonumber(b:match("/db (%d+)"))*10000)
+    customdrop = true
+    return true
+    end
+if b:find("/dd (%d+)") then
+wls = (tonumber(b:match("/dd (%d+)"))*100)
 customdrop = true
 return true
 end
@@ -765,25 +715,27 @@ end_dialog|wrench_modesxd|`wCancel|`wContinue|
 return true
 end
 end
+--update auto pull when enter
+--end auto pull when enter
 AddHook("OnSendPacket", "wm", wm)
-    function wp(b, b)
-        if b == ("action|input\n|text|/wpull") then
-            mode_wm = "pull"
-            ConsoleLog("`wWrench mode = `2Pull")
-            ConsoleLog("`wPull mode `2Activated")
-            function Wrench(b)
-                if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
-                    x = b[1]
-                    x2 = x:match("embed_data|netID|(%d+)")
-                    SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|pull")
-                    return true
-                end
+function wp(b, b)
+    if b == ("action|input\n|text|/wpull") then
+        mode_wm = "pull"
+        ConsoleLog("`wWrench mode = `2Pull")
+        ConsoleLog("`wPull mode `2Activated")
+        function Wrench(b)
+            if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
+                x = b[1]
+                x2 = x:match("embed_data|netID|(%d+)")
+                SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|pull")
+                return true
             end
-            AddHook("OnVariant", "Wrench", Wrench)
-            return true
         end
+        AddHook("OnVariant", "Wrench", Wrench)
+        return true
     end
-    AddHook("OnSendPacket", "wp", wp)
+end
+AddHook("OnSendPacket", "wp", wp)
     function wk(b, b)
         if b == ("action|input\n|text|/wk") then
             mode_wm = "kick"
@@ -937,6 +889,7 @@ AddHook("OnSendPacket", "wm", wm)
     end
     AddHook("OnVariant", "chnage_bgl2", chnage_bgl2)
 
+    --update modal pull
 
 while true do
     Sleep(200)
