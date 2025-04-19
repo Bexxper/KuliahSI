@@ -104,6 +104,8 @@ add_spacer|small|
 add_label_with_icon|big|`3General Commands``|left|5956|
 add_label_with_icon|small|`0/blue `2( Convert `bBLACK `2to `eBGL )|left|3522|
 add_label_with_icon|small|`0/cbl `2( Convert `eBGL `2to `bBLACK )|left|3522|
+add_label_with_icon|small|`0/depo `2( Deposit `eBGL `2to `bBank )|left|3522|
+add_label_with_icon|small|`0/wd `2( Withdraw `eBGL `2from `bBank )|left|3522|
 add_label_with_icon|small|`0/wm (wrench mode)|left|3522|
 add_label_with_icon|small|`0/wpull (wrench pull mode)|left|3522|
 add_label_with_icon|small|`0/cdl `0( Change 100 Dls to BGL (wrench Telephone) `0)|left|3522|
@@ -218,11 +220,14 @@ AddHook("OnSendPacket","Hook", function(b, b)
 if b:find("/reme") then if HostApa ~= "reme" then HostApa = "reme" log("`4Wheel Spin `9Mode set to : `9REME") ovl("`4Wheel Spin `9Mode set to : `9REME") else HostApa = "" log("`4Wheel Spin `9Mode set to : `0Normal") ovl("`4Wheel Spin `9Mode set to : `0Normal")
 end 
 return true
+end
+if b:find("/leme") then if HostApa ~= "leme" then HostApa = "leme" log("`4Wheel Spin `9Mode set to : `9LEME") ovl("`4Wheel Spin `9Mode set to : `9LEME") else HostApa = "" log("`4Wheel Spin `9Mode set to : `0Normal") ovl("`4Wheel Spin `9Mode set to : `0Normal")
+end 
+return true
 end 
 if b:find("/qeme") then if HostApa ~= "qeme" then HostApa = "qeme" log("`4Wheel Spin `9Mode set to: `1QEME") ovl("`4Wheel Spin `9Mode set to : `9QEME") else HostApa = "" log("`4Wheel Spin `9Mode set to : `0Normal") ovl("`4Wheel Spin `9Mode set to : `0Normal")
 end 
 return true
-    
 end 
 if b:find("/logspin") then SpinLog() return true end 
 if b:find("dialog_name|WorldSpin\nbuttonClicked|(%d+)") then NetID = tonumber(b:match("dialog_name|WorldSpin\nbuttonClicked|(%d+)")) FilterSpin(NetID) return true end
@@ -301,14 +306,52 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
             end
             local x3_label = ""
             if tonumber(jml) == 19 or tonumber(jml) == 28 or tonumber(jml) == 0 then
-                x3_label = " [X3]"
-            end            
+                x3_label = " `c[X3]"
+            end
+            local autolose_label = ""
+            if tonumber(jml) == 1 or tonumber(jml) == 29 or tonumber (jml) == 10 then
+                autolose_label = " [`4AUTOLOSE`w]"
+            end
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]" .. x3_label
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]" .. x3_label .. autolose_label
         p[3] = -1
         SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"})
+    elseif HostApa == "leme" then
+        Num1 = math.floor(jml / 10)
+        Num2 = jml % 10
+        reme = Num1 + Num2
+        if leme > 10 then
+            leme = leme % 10
+        elseif leme == 10 then
+            leme = "`20"
+        elseif leme == 0 then
+            leme = "`20"
+        end
+        if tonumber(leme) and leme >= 7 and leme <= 9 then
+            leme = "`2" .. leme
+        elseif tonumber(leme) and leme >= 4 and leme <= 6 then
+            reme = "`9" .. reme
+        elseif tonumber(leme) and leme >= 2 and leme <= 3 then
+            leme = "`4" .. leme
+        elseif tonumber(leme) and leme == 1 then
+            leme = "`4" .. leme
+        end
+        local x3_leme = ""
+        if tonumber(jml) == 19 or tonumber(jml) == 28 or tonumber(jml) == 0 then
+            x3_leme = " `c[X4]"
+        end
+        local autolose_labeleme = ""
+        if tonumber(jml) == 2 or tonumber(jml) == 11 or tonumber (jml) == 9 or tonumber (jml) == 18 or tonumber (jml) == 27 or tonumber (jml) == 36 then
+            autolose_labeleme = " [`4AUTOLOSE`w]"
+        end
+        p = {}
+        p[0] = "OnTalkBubble"
+        p[1] = b[1]
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9LEME `w: "..leme.."`w]" .. x3_leme .. autolose_labeleme
+        p[3] = -1
+        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9LEME `w: "..leme.."`w]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9LEME `w: "..leme.."`w]"})
         else
         p = {}
         p[0] = "OnTalkBubble"
@@ -339,6 +382,21 @@ function res(b, b)
     end
 end
 AddHook("OnSendPacket", "respawn", res)
+
+--dbgems
+function drop_gems(b, b)
+    if b == "action|input\n|text|/dgems" then
+        for i = 1, 20 do
+            SendPacket(2, "action|dialog_return\ndialog_name|popup\nbuttonClicked|bgem_dropall")
+            Sleep(500) -- delay agar tidak ke-spam terlalu cepat
+        end
+        -- Kirim info ke chat bahwa sudah selesai
+        SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Done dropped `e5K BGEMS")
+        return true
+    end
+end
+AddHook("OnSendPacket", "drop_gems", drop_gems)
+
 
 ---champ
 chem_mode = false
@@ -716,6 +774,34 @@ return true
 end
 end
 --update auto pull when enter
+local autoPullEnabled = false
+
+AddHook("OnSendPacket", "TOGGLE_AUTOPULL", function(_, str)
+    if str:find("/ap1") then
+        autoPullEnabled = true
+        log("`2Auto Pull Activated")
+        ovl("`2Auto Pull Activated")
+        return true
+    elseif str:find("/ap2") then
+        autoPullEnabled = false
+        log("`4Auto Pull Deactivated")
+        ovl("`4Auto Pull Deactivated")
+        return true
+    end
+end)
+
+AddHook("OnVariant", "AUTOPULL_PLAYER_ENTER", function(var)
+    if not autoPullEnabled then return end
+
+    if var[0] == "OnSpawn" and var[1]:find("netID|") then
+        local netid = tonumber(var[1]:match("netID|(%d+)"))
+        if netid and netid ~= GetLocal().netid then
+            SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. netid .. "|\nbuttonClicked|pull")
+            log("`9Pulled player with NetID: " .. netid)
+            ovl("`9Pulled player with NetID: " .. netid)
+        end
+    end
+end)
 --end auto pull when enter
 AddHook("OnSendPacket", "wm", wm)
 function wp(b, b)
@@ -723,6 +809,7 @@ function wp(b, b)
         mode_wm = "pull"
         ConsoleLog("`wWrench mode = `2Pull")
         ConsoleLog("`wPull mode `2Activated")
+        ovl("`wPull mode `2Activated")
         function Wrench(b)
             if b[0] == "OnDialogRequest" and b[1]:find("add_button|pull|`5Pull``|0|0|") then
                 x = b[1]
@@ -780,6 +867,7 @@ AddHook("OnSendPacket", "wp", wp)
             mode_wm = "off"
             ConsoleLog("`wWrench mode `4Deactive")
             ConsoleLog("`4Deactive `wWrench mode")
+            ovl("`4Deactive `wWrench mode")
             RemoveHook("Wrench")
             return true
         end
