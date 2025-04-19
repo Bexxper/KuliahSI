@@ -266,24 +266,42 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
         jml2 = b[2]:find("``!") - 1
         jml = b[2]:sub(jml1, jml2)
         if HostApa == "qeme" then
-            qeme = jml % 10 
-            if qeme >= 10 then 
-                qeme = "`20"
-            elseif qeme == 0 then 
-                qeme = "`2"..qeme.."" 
-            elseif qeme <= 3 then 
-                qeme = "`4"..qeme.."" 
-            elseif qeme <= 6 then 
-                qeme = "`9"..qeme.."" 
-            elseif qeme <= 9 then 
-                qeme = "`2"..qeme.."" 
+            local raw_jml = tonumber(jml) or 0
+            local qeme_digit = raw_jml % 10
+            local x3_label = ""
+        
+            -- KASUS KHUSUS: Jika jml == 0 → QEME : 1 (bukan 0)
+            if raw_jml == 0 then
+                qeme_digit = 1
+            -- Jika digit = 0 dan jml bukan 0 (misal: 10, 20, 30) → QEME : 0 + [X3]
+            elseif qeme_digit == 0 then
+                x3_label = "`c[X3]"
             end
-        p = {}
-        p[0] = "OnTalkBubble"
-        p[1] = b[1]
-        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`2QEME : "..qeme.."`w] "
-        p[3] = -1
-        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`2QEME : "..qeme.."`w]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`2QEME : "..qeme.."`w]"})
+        
+            -- Format warna
+            local qeme = ""
+            if qeme_digit <= 3 then 
+                qeme = "`4" .. qeme_digit
+            elseif qeme_digit <= 6 then 
+                qeme = "`9" .. qeme_digit
+            elseif qeme_digit <= 9 then 
+                qeme = "`2" .. qeme_digit
+            end
+        
+            -- Tampilkan Talk Bubble
+            p = {}
+            p[0] = "OnTalkBubble"
+            p[1] = b[1]
+            p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2] .. " `w[`2QEME : "..qeme.."`w] " .. x3_label
+            p[3] = -1
+            SendVariantList(p)
+        
+            -- Log Spin
+            table.insert(LogSpin, {
+                spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2] .. " `w[`2QEME : "..qeme.."`w] "..x3_label.."|left|758|"..b[1].."|\n",
+                netid = b[1],
+                spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2] .. " `w[`2QEME : "..qeme.."`w] "..x3_label
+            })
         elseif HostApa == "reme" then
             Num1 = math.floor(jml / 10)
             Num2 = jml % 10
@@ -317,7 +335,7 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
         p[1] = b[1]
         p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]" .. x3_label .. autolose_label
         p[3] = -1
-        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"})
+        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"..x3_label.."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"..x3_label})
     elseif HostApa == "leme" then
         Num1 = math.floor(jml / 10)
         Num2 = jml % 10
