@@ -123,6 +123,8 @@ add_label_with_icon|big|`3Host Commands``|left|758|
 add_spacer|small|
 add_label_with_icon|small|`0/reme `0[ REME MODE `0]|left|3522|
 add_label_with_icon|small|`0/qeme `0[ QEME MODE `0]|left|3522|
+add_label_with_icon|small|`0/leme `0[ LEME MODE `0]|left|3522|
+add_label_with_icon|small|`0/ceme `0[ CEME MODE `0]|left|3522|
 add_label_with_icon|small|`0/logspin [ Wheel Spin History ] |left|3522|
 add_label_with_icon|small|`0/logsdrop [ Drop & Collect History ] |left|3522|
 add_spacer|small|
