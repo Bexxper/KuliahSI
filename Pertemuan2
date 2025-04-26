@@ -65,12 +65,14 @@ add_label_with_icon|small|`bBlack Gem Lock : `0]].. BLCK ..[[|left|11550|
 add_spacer|small|
 add_label_with_icon|medium|`0Log Update``|left|3524|
 add_label_with_icon|small|`2[ + ] Added Feature |left|
-add_label_with_icon|small|`0Adjust /db (count) [ /db 150 = drop 1 Black 50 bgl ] |left|
-add_label_with_icon|small|`0Adjust /dd (count) [ /dd 150 = drop 1 BGL 50 DL ] |left|
-add_label_with_icon|small|`0Added [X3] on /reme when player got 19,28,0 |left|
+add_label_with_icon|small|`0Added Collect Text, Overlay, Console|left|
+add_label_with_icon|small|`0Adjust Wheel Text|left|
 add_spacer|small|
 add_label_with_icon|small|`2[ + ] Added Command |left|
 add_label_with_icon|small|`0Added /logspin [ Wheel spin History click roulette to focus on 1 player spin ] |left|3522|
+add_label_with_icon|small|`0/logsdrop [ Drop & Collect History ] |left|3522|
+add_label_with_icon|small|`0/leme [ LEME game Mode ] |left|3522|
+add_label_with_icon|small|`0/ceme [ CEME game Mode ] |left|3522|
 add_spacer|small|
 add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
 add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
@@ -122,6 +124,7 @@ add_spacer|small|
 add_label_with_icon|small|`0/reme `0[ REME MODE `0]|left|3522|
 add_label_with_icon|small|`0/qeme `0[ QEME MODE `0]|left|3522|
 add_label_with_icon|small|`0/logspin [ Wheel Spin History ] |left|3522|
+add_label_with_icon|small|`0/logsdrop [ Drop & Collect History ] |left|3522|
 add_spacer|small|
 add_url_button||`1Discord TeamAW[CPS]``|kr|https://discord.gg/Q2E3R4rt|
 add_url_button||`5Instagram Aawastore``|kr|https://www.instagram.com/aawastore.gti|
