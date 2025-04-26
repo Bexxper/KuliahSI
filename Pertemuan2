@@ -136,17 +136,17 @@ function ovl(str)
 SendVariantList({ [0] = "OnTextOverlay", [1] = str })
 end
     
-    AddHook("onvariant", "OTHERVAR", function(var)
-        if var[0]:find("OnConsoleMessage") and var[1]:find("World Locked") then
-        SendVariantList({
-        [0] = "OnAddNotification",
-        [1] = "interface/atomic_button.rttex",
-        [2] = "[`b[ DOM ]`0]\n`1Visit Aawastore",
-        [3] = "audio/hub_open.wav"
-        })
-        SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] Proxy `2Successfully loaded")
-        end
-    end)
+AddHook("onvariant", "OTHERVAR", function(var)
+    if var[0]:find("OnConsoleMessage") and var[1]:find("World Locked") then
+    SendVariantList({
+    [0] = "OnAddNotification",
+    [1] = "interface/atomic_button.rttex",
+    [2] = "[`c[ DOM ]`0]\n`1Visit Aawastore",
+    [3] = "audio/hub_open.wav"
+    })
+    SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] Proxy `2Successfully loaded `w[`b[ DOM ]`0] WORLD : `#CPS `w[ `oVisit Aawastore `w]") ---11
+    end
+end)
     ---function drop
     function drop(id,amount)
         SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|"..id.."|\nitem_count|"..amount)
@@ -212,7 +212,7 @@ Sleep(50)
 end
 
 function GetName(id) for _, player in pairs(GetPlayerList()) do if player.netid == id then return player.name end end end 
---DropLog Update 3.0
+function ActivityLogPage() Action = {} for _, log in pairs(ActivityLog) do table.insert(Action, log.act) end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|Logs Drop|left|10794|\nadd_spacer|small|\n"..table.concat(Action).."\nadd_spacer|small|\nadd_quick_exit|||\nend_dialog|ActivityLog|Close||"}) end
 function FilterSpin(id) FilterLog = {} for _, log in pairs(LogSpin) do if log.netid == id then table.insert(FilterLog,"\nadd_label_with_icon|small|"..log.spin.."|left|758|\n") end end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|"..GetName(id).." Spin Logs|left|758|\nadd_spacer|small|\n"..table.concat(FilterLog).."\nadd_spacer|small|\nadd_button|/cctv|Exit|noflags|0|0|\nadd_quick_exit|||\nend_dialog|FilterSpin|||"}) end
 function SpinLog() SpunLog = {} for _, spin in pairs(LogSpin) do table.insert(SpunLog, spin.spin) end SendVariantList({[0] = "OnDialogRequest", [1] = "set_default_color|`w|\nadd_label_with_icon|big|Spin Logs|left|758|\nadd_spacer|small|\nadd_smalltext|Press wheel button to focus player spin Logs|\n"..table.concat(SpunLog).."\nadd_spacer|small|\nadd_quick_exit|||\nend_dialog|WorldSpin|Close||"}) end---spinlog update
 
@@ -229,27 +229,31 @@ if b:find("/qeme") then if HostApa ~= "qeme" then HostApa = "qeme" log("`4Wheel 
 end 
 return true
 end 
-if b:find("/logspin") then SpinLog() return true end 
+if b:find("/ceme") then if HostApa ~= "ceme" then HostApa = "ceme" log("`4Wheel Spin `9Mode set to: `1CEME") ovl("`4Wheel Spin `9Mode set to : `9CEME") else HostApa = "" log("`4Wheel Spin `9Mode set to : `0Normal") ovl("`4Wheel Spin `9Mode set to : `0Normal")
+end 
+return true
+end 
+if b:find("/logspin") then SpinLog() return true end
+if b:find("/logsdrop") then ActivityLogPage() return true end
 if b:find("dialog_name|WorldSpin\nbuttonClicked|(%d+)") then NetID = tonumber(b:match("dialog_name|WorldSpin\nbuttonClicked|(%d+)")) FilterSpin(NetID) return true end
 end)
 
 AddHook("OnVariant","Hook",function(b)
 if b[0] == "OnConsoleMessage" and b[1]:find("`6<(.+)") then return false
-elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) World Lock") then AmountCollectWL = tonumber(b[1]:match("Collected  `w(%d+) World Lock")) 
-    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectWL.." `9World Lock `oat "..os.date("%H:%M on %d/%m").."|left|486|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectWL.. " `9World Lock"})
+elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) World Lock") then AmountCollectWL = tonumber(b[1]:match("Collected  `w(%d+) World Lock")) ovl("`2Collected `w"..AmountCollectWL.." `9World Locks") SendPacket(2, "action|input\n|text|[`b[ DOM ]`w] `5Collect `w"..AmountCollectWL.." `9WL")
+    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectWL.." `9World Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectWL.. " `9World Lock"})
     return true
-    elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) Diamond Lock") then AmountCollectDL = tonumber(b[1]:match("Collected  `w(%d+) Diamond Lock")) 
-    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectDL.." `1Diamond Lock `oat "..os.date("%H:%M on %d/%m").."|left|486|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectDL.. " `1Diamond Lock"})
+    elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) Diamond Lock") then AmountCollectDL = tonumber(b[1]:match("Collected  `w(%d+) Diamond Lock")) ovl("`2Collected `w"..AmountCollectDL.." `1DL") SendPacket(2, "action|input\n|text|[`b[ DOM ]`w] `5Collect `w"..AmountCollectDL.." `1DL")
+    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectDL.." `1Diamond Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectDL.. " `1Diamond Lock"})
     return true
-    elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) Blue Gem Lock") then AmountCollectBGL = tonumber(b[1]:match("Collected  `w(%d+) Blue Gem Lock")) 
-    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectBGL.." `eBlue Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|486|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectBGL.. " `eBlue Gem Lock"})
+    elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) Blue Gem Lock") then AmountCollectBGL = tonumber(b[1]:match("Collected  `w(%d+) Blue Gem Lock")) ovl("`2Collected `w"..AmountCollectBGL.." `eBGL") SendPacket(2, "action|input\n|text|[`b[ DOM ]`w] `5Collect `w"..AmountCollectBGL.." `eBGL")
+    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectBGL.." `eBlue Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectBGL.. " `eBlue Gem Lock"})
     return true
-    elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) Black Gem Lock") then AmountCollectBBGL = tonumber(b[1]:match("Collected  `w(%d+) Black Gem Lock")) 
-    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectBBGL.." `bBlack Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|486|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectBBGL.. " `bBlack Gem Lock"})
+    elseif b[0] == "OnConsoleMessage" and b[1]:find("Collected  `w(%d+) Black Gem Lock") then AmountCollectBBGL = tonumber(b[1]:match("Collected  `w(%d+) Black Gem Lock")) ovl("`2Collected `w"..AmountCollectBBGL.." `bBLACK") SendPacket(2, "action|input\n|text|[`b[ DOM ]`w] `5Collect `w"..AmountCollectBBGL.." `bBLACK")
+    table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oCollected `w"..AmountCollectBBGL.." `bBlack Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Collected `w" ..AmountCollectBBGL.. " `bBlack Gem Lock"})
     return true
-elseif b[0] == "OnSDBroadcast" then log("`8Super Duper Broadcast `4Blocked")
+elseif b[0] == "OnSDBroadcast" then log("`1Super Duper Broadcast `4Blocked") ovl("`1Super Duper Broadcast `4Blocked")
 return true
-elseif b[0] == "OnTalkBubble" and b[1] == GetLocal().netid and b[2]:find("Deposited") and b[2]:find("You have `$(%d+)`` in the bank now.") then AmountDepo = b[2]:match("Deposited `$(%d+)`` Blue Gem Locks!") log("[`b[DOM]`0] `9Deposited `w"..AmountDepo.." `eBlue Gem Lock") return true
 elseif b[0] == "OnTalkBubble" and b[1] == GetLocal().netid and b[2]:find("`2Withdrawn") and b[2]:find("You have (%d+) in the bank now.") then AmountWithdrawn = b[2]:match("`2Withdrawn (%d+) Blue Gem Locks!") log("[`b[DOM]`0] `9Withdrawn `w"..AmountWithdrawn.." `eBlue Gem Lock") return true
 elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and got") then
     if b[2]:find("``6>``") then
@@ -292,7 +296,7 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
             p = {}
             p[0] = "OnTalkBubble"
             p[1] = b[1]
-            p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2] .. " `w[`2QEME : "..qeme.."`w] " .. x3_label
+            p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] (`5" .. jml .. "`w) `w[`2QEME : "..qeme.."`w] " .. x3_label
             p[3] = -1
             SendVariantList(p)
         
@@ -326,20 +330,16 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
             if tonumber(jml) == 19 or tonumber(jml) == 28 or tonumber(jml) == 0 then
                 x3_label = " `c[X3]"
             end
-            local autolose_label = ""
-            if tonumber(jml) == 1 or tonumber(jml) == 29 or tonumber (jml) == 10 then
-                autolose_label = " [`4AUTOLOSE`w]"
-            end
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]" .. x3_label .. autolose_label
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] (`5" .. jml .."`w) `w[`9REME `w: "..reme.."`w]" .. x3_label
         p[3] = -1
         SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"..x3_label.."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9REME `w: "..reme.."`w]"..x3_label})
     elseif HostApa == "leme" then
         Num1 = math.floor(jml / 10)
         Num2 = jml % 10
-        reme = Num1 + Num2
+        leme = Num1 + Num2
         if leme > 10 then
             leme = leme % 10
         elseif leme == 10 then
@@ -350,32 +350,76 @@ elseif b[0] == "OnTalkBubble" and b[3] ~= -1 and b[2]:find("spun the wheel and g
         if tonumber(leme) and leme >= 7 and leme <= 9 then
             leme = "`2" .. leme
         elseif tonumber(leme) and leme >= 4 and leme <= 6 then
-            reme = "`9" .. reme
+            leme = "`9" .. leme
         elseif tonumber(leme) and leme >= 2 and leme <= 3 then
             leme = "`4" .. leme
         elseif tonumber(leme) and leme == 1 then
             leme = "`4" .. leme
         end
-        local x3_leme = ""
-        if tonumber(jml) == 19 or tonumber(jml) == 28 or tonumber(jml) == 0 then
-            x3_leme = " `c[X4]"
+    
+        local leme_label = ""
+        if tonumber(jml) == 1 or tonumber(jml) == 29 or tonumber(jml) == 10 then
+            leme_label = " `c[X3]"
+        elseif tonumber(jml) == 19 or tonumber(jml) == 28 or tonumber(jml) == 0 then
+            leme_label = " `c[X4]"
         end
-        local autolose_labeleme = ""
-        if tonumber(jml) == 2 or tonumber(jml) == 11 or tonumber (jml) == 9 or tonumber (jml) == 18 or tonumber (jml) == 27 or tonumber (jml) == 36 then
-            autolose_labeleme = " [`4AUTOLOSE`w]"
-        end
+    
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9LEME `w: "..leme.."`w]" .. x3_leme .. autolose_labeleme
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] (`5" .. jml .."`w) `w[`6LEME : "..leme.."`w]" .. leme_label
         p[3] = -1
-        SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9LEME `w: "..leme.."`w]|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`9LEME `w: "..leme.."`w]"})
-        else
+        SendVariantList(p)
+        table.insert(LogSpin, {
+            spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`6LEME : "..leme.."`w]"..leme_label.."|left|758|"..b[1].."|\n",
+            netid = b[1],
+            spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].." `w[`6LEME : "..leme.."`w]"..leme_label
+        })
+    elseif HostApa == "ceme" then
+        local Num1 = math.floor(jml / 10)
+        local Num2 = jml % 10
+        local ceme = Num1 + Num2
+    
+        if ceme > 10 then
+            ceme = ceme % 10
+        elseif ceme == 10 or ceme == 0 then
+            ceme = "`20"
+        end
+    
+        if tonumber(ceme) and ceme >= 7 and ceme <= 9 then
+            ceme = "`2" .. ceme
+        elseif tonumber(ceme) and ceme >= 4 and ceme <= 6 then
+            ceme = "`9" .. ceme
+        elseif tonumber(ceme) and ceme >= 2 and ceme <= 3 then
+            ceme = "`4" .. ceme
+        elseif tonumber(ceme) and ceme == 1 then
+            ceme = "`4" .. ceme
+        end
+    
+        local ceme_label = ""
+        local j = tonumber(jml)
+        if j == 0 or j == 19 or j == 28 then
+            ceme_label = " `c[X4]"
+        elseif j == 1 or j == 10 or j == 29 or j == 2 or j == 11 or j == 20 then
+            ceme_label = " `c[X3]"
+        end
+    
         p = {}
         p[0] = "OnTalkBubble"
         p[1] = b[1]
-        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2]
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] ("..jml..") `w[`6CEME : "..ceme.."`w]"..ceme_label
         p[3] = -1
+        SendVariantList(p)
+        table.insert(LogSpin, {
+            spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] "..b[2].." `w[`6CEME : "..ceme.."`w]"..ceme_label.."|left|758|"..b[1].."|\n",
+            netid = b[1],
+            spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] ("..jml..") `w[`6CEME : "..ceme.."`w]"..ceme_label
+        })
+    else
+        p = {}
+        p[0] = "OnTalkBubble"
+        p[1] = b[1]
+        p[2] = "`0[`b[ DOM ]`0]`0[`2REAL`0] (".. jml .. ") "
         SendVariantList(p) table.insert(LogSpin, {spin = "\nadd_label_with_icon_button|small|`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2].."|left|758|"..b[1].."|\n", netid = b[1], spins = "`0[`b[ DOM ]`0]`0[`2REAL`0] " .. b[2]})
         end
         else
@@ -400,21 +444,6 @@ function res(b, b)
     end
 end
 AddHook("OnSendPacket", "respawn", res)
-
---dbgems
-function drop_gems(b, b)
-    if b == "action|input\n|text|/dgems" then
-        for i = 1, 20 do
-            SendPacket(2, "action|dialog_return\ndialog_name|popup\nbuttonClicked|bgem_dropall")
-            Sleep(500) -- delay agar tidak ke-spam terlalu cepat
-        end
-        -- Kirim info ke chat bahwa sudah selesai
-        SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `2Done dropped `e5K BGEMS")
-        return true
-    end
-end
-AddHook("OnSendPacket", "drop_gems", drop_gems)
-
 
 ---champ
 chem_mode = false
@@ -568,19 +597,19 @@ function cdrop_delayed()
     --dropping
     if black > 0 then
         dropes(itemid[1], itemamt[1])
-        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[1].." `bBlack Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[1].. " `bBlack Gem Lock"})
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[1].." `bBlack Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[1].. " `bBlack Gem Lock"})
     end
     if bgl > 0 then
         dropes(itemid[2], itemamt[2])
-        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[2].." `eBlue Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[2].. " `eBlue Gem Lock"})
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[2].." `eBlue Gem Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[2].. " `eBlue Gem Lock"})
     end
     if dl > 0 then
         dropes(itemid[3], itemamt[3])
-        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[3].." `1Diamond Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[3].. " `1Diamond Lock"})
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[3].." `1Diamond Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[3].. " `1Diamond Lock"})
     end
     if wl > 0 then
         dropes(itemid[4], itemamt[4])
-        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[4].." `9World Lock `oat "..os.date("%H:%M on %d/%m").."|left|484|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[4].. " `9World Lock"})
+        table.insert(ActivityLog, {act = "\nadd_label_with_icon|small|"..GetLocal().name.." `oDropped `w"..itemamt[4].." `9World Lock `oat "..os.date("%H:%M on %d/%m").."|left|10794|\n", netid = GetLocal().netID, acts = "Dropped `w" ..itemamt[4].. " `9World Lock"})
     end
     --ConsoleLog("`5Dropped `3" .. black .. " `bblacks `3" .. bgl .. " `9bgl `3" .. dl .. " `9dls and `3" .. wl .. " `9wls")
     return true end
@@ -687,6 +716,21 @@ AddHook("OnSendPacket", "dropblackuy", dropblackuy)
         end
     end
     AddHook("OnSendPacket", "cdepo_bgl", depobgl)
+    function depo_success_checker(var)
+        if var[0] == "OnTalkBubble" and var[1] == GetLocal().netid then
+            if var[2]:find("Deposited") and var[2]:find("Blue Gem Locks!") then
+                local amount = var[2]:match("Deposited `%$(%d+)`` Blue Gem Locks!")
+                amount = amount or "?"
+                local message = "[`b[ DOM ]`0] `2Successfully deposited `e" .. amount .. " `9BGL!"
+                SendPacket(2, "action|input\n|text|" .. message)
+                ConsoleLog(message)
+                ovl(message)
+                return true
+            end
+        end
+    end
+    AddHook("OnVariant", "depo_success_checker", depo_success_checker)
+    
     function wdbgl(b, b)
         if b:find("action|input") then
             text = b:gsub("action|input\n|text|", "")
