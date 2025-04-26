@@ -882,6 +882,9 @@ function wp(b, b)
                 x = b[1]
                 x2 = x:match("embed_data|netID|(%d+)")
                 SendPacket(2, "action|dialog_return\ndialog_name|popup\nnetID|" .. x2 .. "|\nbuttonClicked|pull")
+                ovl("`cPulled Player netID "..x2.."")
+                SendPacket(2, "action|input\n|text|[`b[ DOM ]`0] `5Pulled Player")
+
                 return true
             end
         end
