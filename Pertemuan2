@@ -485,7 +485,7 @@ function chmp_hook_xd(b, b)
 end
 AddHook("OnSendPacket", "chmp_hook_xd", chmp_hook_xd)
 function chemp_bang(b)
-    if b[0] == "OnDialogRequest" and b[1]:find("add_label_with_icon|big|`wChampagne````|left|15816|") then
+    if b[0] == "OnDialogRequest" and b[1]:find("One Champagne Bottle cost") then
         return true
     end
 end
